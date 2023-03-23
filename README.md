@@ -12,3 +12,4 @@ Caio Petrucci dos Santos Rosa, 248245
 Gabriel Gardini, 246289
 Luan Augusto Fazolin, 182236
 Paulo Vinícius Pinto, 242863
+Gustavo Eugenio John, 248318
