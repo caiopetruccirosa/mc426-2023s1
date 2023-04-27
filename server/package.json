@@ -1,0 +1,22 @@
+{
+  "name": "wikirepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caiopetruccirosa/mc426-2023s1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caiopetruccirosa/mc426-2023s1/issues"
+  },
+  "homepage": "https://github.com/caiopetruccirosa/mc426-2023s1#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
