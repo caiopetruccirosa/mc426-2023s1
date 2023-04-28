@@ -1,0 +1,35 @@
+{
+  "name": "wikiforum-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "dev": "npx nodemon src/server.ts --watch 'src/' -e ts",
+    "compile": "npx tsc",
+    "start": "node ./dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caiopetruccirosa/mc426-2023s1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caiopetruccirosa/mc426-2023s1/issues"
+  },
+  "homepage": "https://github.com/caiopetruccirosa/mc426-2023s1#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/helmet": "^4.0.0",
+    "@types/morgan": "^1.9.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
