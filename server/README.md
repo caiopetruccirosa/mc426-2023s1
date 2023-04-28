@@ -4,8 +4,11 @@ Project structure proposal:
 
 ```
 /server                     
-├─ /controllers
-├─ /middleware
-├─ /service
-└─ server.js                
+├─ /middlewares
+├─ /models
+├─ /routes
+├─ /repositories
+├─ /routes
+├─ /services
+└─ server.ts                
 ```
