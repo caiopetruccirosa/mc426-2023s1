@@ -11,5 +11,5 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
+      - ./sql:/docker-entrypoint-initdb.d
     command: "-c logging_collector=on"
