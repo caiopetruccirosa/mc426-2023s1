@@ -1,10 +1,10 @@
 import errors from '../utils/errors';
 import User from '../models/user';
-import { existsUserByUsername, createUser } from '../repositories/user';
+import { existsUserByUsername, getUserByUsername, createUser } from '../repositories/user';
 import crypto from 'crypto';
 
 const generateSalt = (): string => {
-    return crypto.randomBytes(128).toString('base64');
+    return crypto.randomBytes(32).toString('base64');
 }
 
 const generatePassword = (salt: string, password: string): string =>  {
@@ -44,7 +44,14 @@ const validateUserFields = (user: User) => {
         throw new Error(errors.INVALID_PASSWORD);
 }
 
-export const signUp = async (user: User) => {
+const overwriteUserSaltAndPwd = (user: User): User => {
+    // overwrite user salt and password before returning
+    user.salt = undefined;
+    user.password = undefined;
+    return user;
+}
+
+export const signUp = async (user: User): Promise<User> => {
     // check if user fields like username, nickname, email and password are valid
     validateUserFields(user);
 
@@ -53,13 +60,29 @@ export const signUp = async (user: User) => {
         throw Error(errors.USER_ALREADY_EXISTS)
 
     const salt = generateSalt();
-    await createUser({
+    const userCreated = {
         username: user.username,
         nickname: user.nickname,
         email: user.nickname,
         role: "DEFAULT_ROLE",
         password: generatePassword(salt, user.password!),
-    });
+    };
+    await createUser(userCreated);
+
+    return overwriteUserSaltAndPwd(userCreated);
 }
 
-export const signIn = async () => {}
+export const signIn = async (username: string, password: string): Promise<User> => {
+    try {
+        const user = await getUserByUsername(username);
+
+        // check if password is correct
+        const encryptedPwd = generatePassword(user.salt!, password);
+        if (encryptedPwd != user.password)
+            throw Error(errors.INCORRECT_USERNAME_OR_PWD);
+
+        return overwriteUserSaltAndPwd(user);
+    } catch (error) {
+        throw Error(errors.INCORRECT_USERNAME_OR_PWD);
+    }
+}
