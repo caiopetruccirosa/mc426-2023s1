@@ -1,14 +1,26 @@
+import {signUp} from '../services/authentication';
 import {createPost} from '../services/post';
 import errors from '../utils/errors';
+
+// Credentials to create user used in post tests
+const user_credentials = {
+    username: 'rightusertest',
+    nickname: 'Right User Test',
+    email: 'rightusertest@gmail.com',
+    password: 'RightP@ssw0rdTest'
+  }
 
 // Post with attributes that follow all the requirements
 const right_post_attributes = {
   id: 'post1234',
-  posterUsername: 'poster1234',
+  posterUsername: 'rightusertest',
   date: new Date(),
   title: 'post_title',
   content: 'post_content'
 }
+
+// Sign up user to be used on tests
+await signUp(user_credentials)
 
 // Create post test
 
@@ -18,7 +30,7 @@ describe('Post', () => {
   
             const post = {
                 id: right_post_attributes.id,
-                posterUsername: null,
+                posterUsername: 'wrongusertest',
                 date: right_post_attributes.date,
                 title: right_post_attributes.title,
                 content: right_post_attributes.content
