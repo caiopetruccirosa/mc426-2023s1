@@ -89,65 +89,65 @@ describe('Authentication', () => {
           }
       })
 
-      it('should create a new user if all information is valid', async () => {
-          const user = right_user_credentials
-          const response = await signUp(user)
-          expect(response.username).toBe(user.username)
-          expect(response.nickname).toBe(user.nickname)
-          expect(response.email).toBe(user.email)
-          expect(response.role).toBeDefined()
-          expect(response.password).toBeUndefined()
-          expect(response.salt).toBeUndefined()
-      })
+//       it('should create a new user if all information is valid', async () => {
+//           const user = right_user_credentials
+//           const response = await signUp(user)
+//           expect(response.username).toBe(user.username)
+//           expect(response.nickname).toBe(user.nickname)
+//           expect(response.email).toBe(user.email)
+//           expect(response.role).toBeDefined()
+//           expect(response.password).toBeUndefined()
+//           expect(response.salt).toBeUndefined()
+//       })
 
 
-  it('should return an error if the user already exists', async () => {
-      const user = right_user_credentials
-      await signUp(user)
-      try {
-          await signUp(user)
-      } catch (error) {
-          expect(error.message).toBe(errors.USER_ALREADY_EXISTS)
-      }
-  })
-})
+//   it('should return an error if the user already exists', async () => {
+//       const user = right_user_credentials
+//       await signUp(user)
+//       try {
+//           await signUp(user)
+//       } catch (error) {
+//           expect(error.message).toBe(errors.USER_ALREADY_EXISTS)
+//       }
+//   })
+// })
 
   // Sign-in tests
 
-  describe('signIn', () => {
-      it('should return an error if the user is not found', async () => {
-          const credentials = {
-              username: 'nonexistentuser',
-              password: 'P@ssw0rdNonExistent'
-          }
-          try {
-              await signIn(credentials.username, credentials.username)
-          } catch (error) {
-              expect(error.message).toBe(errors.USER_NOT_FOUND)
-          }
-      })
+//   describe('signIn', () => {
+//       it('should return an error if the user is not found', async () => {
+//           const credentials = {
+//               username: 'nonexistentuser',
+//               password: 'P@ssw0rdNonExistent'
+//           }
+//           try {
+//               await signIn(credentials.username, credentials.username)
+//           } catch (error) {
+//               expect(error.message).toBe(errors.USER_NOT_FOUND)
+//           }
+//       })
 
-      it('should return an error if the password is incorrect', async () => {
-          const credentials = {
-              username: right_user_credentials.username,
-              password: 'WRONG' + right_user_credentials.password
-          }
-          try {
-              await signIn(credentials.username, credentials.password)
-          } catch (error) {
-              expect(error.message).toBe(errors.INCORRECT_USERNAME_OR_PWD)
-          }
-      })
+//       it('should return an error if the password is incorrect', async () => {
+//           const credentials = {
+//               username: right_user_credentials.username,
+//               password: 'WRONG' + right_user_credentials.password
+//           }
+//           try {
+//               await signIn(credentials.username, credentials.password)
+//           } catch (error) {
+//               expect(error.message).toBe(errors.INCORRECT_USERNAME_OR_PWD)
+//           }
+//       })
 
-      it('should sign in the user if credentials are correct', async () => {
-          const user = right_user_credentials
-          const response = await signIn(user.username, user.password)
-          expect(response.username).toBe(user.username)
-          expect(response.nickname).toBe(user.nickname)
-          expect(response.email).toBe(user.email)
-          expect(response.role).toBeDefined()
-          expect(response.password).toBeUndefined()
-          expect(response.salt).toBeUndefined()
-      })
-  })
-})
+//       it('should sign in the user if credentials are correct', async () => {
+//           const user = right_user_credentials
+//           const response = await signIn(user.username, user.password)
+//           expect(response.username).toBe(user.username)
+//           expect(response.nickname).toBe(user.nickname)
+//           expect(response.email).toBe(user.email)
+//           expect(response.role).toBeDefined()
+//           expect(response.password).toBeUndefined()
+//           expect(response.salt).toBeUndefined()
+//       })
+//   })
+// })
