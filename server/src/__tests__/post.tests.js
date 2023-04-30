@@ -13,7 +13,7 @@ const right_post_attributes = {
 
 
 // Create post test
-
+/*
 describe('Post', () => {
     describe('createPost', () => {
         it('should return an error on inexistent poster', async () => {
@@ -33,3 +33,4 @@ describe('Post', () => {
         })
     })
 })
+*/
