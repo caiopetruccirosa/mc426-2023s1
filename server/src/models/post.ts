@@ -1,5 +1,5 @@
 export default class Post {
-    id: string;
+    id?: string;
     posterUsername: string;
     date?: Date;
     title: string;
