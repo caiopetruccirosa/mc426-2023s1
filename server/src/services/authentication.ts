@@ -20,7 +20,7 @@ const validateUserFields = (user: User) => {
 
     // check if username contains only letters or spaces
     const NICKNAME_REGEX = /^[a-zA-Z\s]+$/;
-    if (!NICKNAME_REGEX.test(user.username)) 
+    if (!NICKNAME_REGEX.test(user.nickname)) 
         throw new Error(errors.INVALID_NICKNAME);
 
     // check if email is valid

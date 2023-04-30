@@ -13,6 +13,7 @@ const right_user_credentials = {
 
 describe('Authentication', () => {
   describe('signUp', () => {
+    
       it('should return an error if the username is invalid', async () => {
 
           const invalidUsernames = ['João', '123abc', 'instituto.computacao', '456']
@@ -98,7 +99,7 @@ describe('Authentication', () => {
           expect(response.password).toBeUndefined()
           expect(response.salt).toBeUndefined()
       })
-  })
+
 
   it('should return an error if the user already exists', async () => {
       const user = right_user_credentials
@@ -109,6 +110,7 @@ describe('Authentication', () => {
           expect(error.message).toBe(errors.USER_ALREADY_EXISTS)
       }
   })
+})
 
   // Sign-in tests
 
