@@ -88,6 +88,8 @@ describe('Authentication', () => {
               }
           }
       })
+	})
+})
 
 //       it('should create a new user if all information is valid', async () => {
 //           const user = right_user_credentials
