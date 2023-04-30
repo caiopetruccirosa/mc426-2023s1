@@ -3,10 +3,10 @@ import { Pool, createPool } from 'generic-pool';
 
 const createDatabaseClient = (): Client => {
     return new Client({
-        'host': process.env.DATABASE_HOST,
-        'user': process.env.DATABASE_USER,
-        'database': process.env.DATABASE_DB,
-        'password': process.env.DATABASE_PASSWORD,
+        'host': process.env.POSTGRES_HOST,
+        'user': process.env.POSTGRES_USER,
+        'database': process.env.POSTGRES_DB,
+        'password': process.env.POSTGRES_PASSWORD,
         'keepAlive': true,
     });
 }
