@@ -8,7 +8,7 @@ Project structure proposal:
 ├─ /models
 ├─ /routes
 ├─ /repositories
-├─ /routes
+├─ /utils
 ├─ /services
 └─ server.ts                
 ```

@@ -1,4 +1,4 @@
-# Projeto Wiki + Repo
+# Projeto Wiki + Fórum
 
 ## Tema
 Repositório/Wiki e fórum sobre conteúdos associados a disciplinas da Unicamp
