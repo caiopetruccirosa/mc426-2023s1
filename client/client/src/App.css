@@ -1,0 +1,78 @@
+body{
+  background: linear-gradient(90deg, rgba(0,56,168,1) 22%, rgba(155,79,150,1) 94%);
+
+}
+nav{
+  text-align: center;
+  height:200px;
+  
+}
+
+nav a{
+  
+  display: inline-block;
+  font-size: xx-large;
+  padding: 50px;
+  text-decoration: none;
+  color:white;
+  border-bottom: 5px solid #f0f0f000;
+}
+
+nav a:hover{
+  transition: border-bottom 1s;
+  border-bottom: 5px solid #f0f0f0;
+}
+main{
+  width: 500px;
+  height:400px;
+  margin:10px auto;
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 5px;
+
+}
+
+ul{
+  padding-left:0;
+  max-height:220px;
+  overflow-y:scroll;
+}
+
+ul li{
+  display: block;
+}
+
+input{
+  box-shadow:  10px 5px 5px rgba(155,79,150,1);
+  border-color: rgba(0,56,168,1);
+  font-size: large;
+  text-align: center;
+  width: 350px;
+  height: 35px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+button{
+  font-size: large;
+  margin-top: 20px;
+  width:200px;
+  height:35px;
+  border-radius: 5px;
+  background-color: white;
+}
+button:hover{
+  transition: background-color .5s, color 1.3s;
+  background-color: rgba(0,56,168,1);
+  color: white;
+}
+
+.todolist{
+  margin-left: 6px;
+  margin-right: 6px;
+  background-color: rgb(235, 205, 233);
+  border: 2px solid rgba(0,56,168,1);
+  box-shadow:  10px 5px 5px rgba(155,79,150,1);
+
+}
