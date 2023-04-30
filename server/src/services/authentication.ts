@@ -64,7 +64,7 @@ export const signUp = async (user: User): Promise<User> => {
         username: user.username,
         nickname: user.nickname,
         email: user.nickname,
-        role: "DEFAULT_ROLE",
+        role: 'DEFAULT_ROLE',
         password: generatePassword(salt, user.password!),
     };
     await createUser(userCreated);
