@@ -31,3 +31,37 @@
 ![ texto](requirementImages/wikipedia6.png)
 
 ### Ao fim da tela de edição do artigo, vemos novamente a opção de preview do artigo editado, além do botão para publicar artigo e exibir mudanças da edição.
+
+# WikiHow
+
+![ texto](requirementImages/wikihow1.png)
+
+### Na tela inicial, vemos funcionalidades como barra de pesquisas, explorar, cadastro, exibição de artigo aleatório e listagem de artigos recomendados.
+
+![ texto](requirementImages/wikihow2.png)
+
+### No topo da tela de um artigo, vemos que a barra de pesquisas é mantida, assim como outras funcionalidades da tela inicial – explorar, cadastro, exibição de artigo aleatório.
+
+![ texto](requirementImages/wikihow3.png)
+
+![ texto](requirementImages/wikihow4.png)
+
+### As duas imagens acima fazem parte do fim da tela do artigo. Nelas é possível ver que há sugestão de artigos relacionados, informação sobre autor(es) e seleção de idiomas.
+
+# Reddit
+
+![ texto](requirementImages/reddit1.png)
+
+### Na tela inicial, dentre as principais funcionalidades, vemos um filtro de posts (Melhores, Em destaque, Novo, Mais votados…), barra de busca, e uma barra para criar post.
+
+![ texto](requirementImages/reddit2.png)
+
+### Na tela de criação de post, temos a barra de busca, seleção do grupo/comunidade em que o post será criado, anexos e rascunhos.
+
+![ texto](requirementImages/reddit3.png)
+
+### Na tela de exibição de um post, é possível votar no post no post e comentar.
+
+![ texto](requirementImages/reddit4.png)
+
+### Ainda na mesma tela, vemos os comentários de outros usuários e as possibilidades de interação com cada uma das respostas: votar no comentário, responder comentário e compartilhar comentário. Também vemos a possibilidade de contatar a moderação.
