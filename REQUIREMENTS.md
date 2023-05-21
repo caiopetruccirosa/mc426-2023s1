@@ -94,7 +94,6 @@ Em vez de construir uma tabela comparando as funcionalidades, dado que fizemos u
 - Exibir artigo aleatório
 - Visualizar artigos recomendados
 
-
 Já para os fóruns extraímos as seguintes funcionalidades:
 - Pesquisar post
 - Filtrar post
