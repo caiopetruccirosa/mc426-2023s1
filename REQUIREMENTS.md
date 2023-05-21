@@ -65,3 +65,42 @@
 ![ texto](requirementImages/reddit4.png)
 
 ### Ainda na mesma tela, vemos os comentários de outros usuários e as possibilidades de interação com cada uma das respostas: votar no comentário, responder comentário e compartilhar comentário. Também vemos a possibilidade de contatar a moderação.
+
+# Quora
+
+![ texto](requirementImages/quora1.png)
+
+### Na tela inicial, dentre as principais funcionalidades vemos a barra de pesquisa, criar post – que sintetiza as ações de “Perguntar”, “Responder” e “Postar” –, votar, seguir um usuário e selecionar tópico (menu à esquerda).
+
+![ texto](requirementImages/quora2.png)
+
+### A tela de criação de post é uma modal view. Não há nenhuma funcionalidade de destaque a não ser a opção de anexos, em específico, do anexo de imagem.
+
+![ texto](requirementImages/quora3.png)
+
+### No Quora não é aberta uma nova tela quando clicamos em um post/pergunta, mas clicando nos comentários é possível ver que, referente aos comentários, podemos votar no comentário ou responder comentário.
+
+
+# Resultados do benchmarking
+Em vez de construir uma tabela comparando as funcionalidades, dado que fizemos uma análise mais minuciosa de poucos exemplos e que quase não há divergência entre as funcionalidades principais tanto das wikis quanto dos fóruns, preferimos listar as funcionalidades que podem ser mais interessantes aplicar em nosso projeto, tendo em mente o escopo deste. Assim, as funcionalidades das wiki que podem ser aplicadas em nosso projeto são as seguintes:
+
+- Pesquisar artigo
+- Selecionar seção do artigo
+- Discutir edição do artigo
+- Visualizar histórico de edições
+- Visualizar artigos relacionados
+- Editar artigo
+- Visualizar preview da edição
+- Exibir artigo aleatório
+- Visualizar artigos recomendados
+
+
+Já para os fóruns extraímos as seguintes funcionalidades:
+- Pesquisar post
+- Filtrar post
+- Criar post
+- Votar em um post
+- Comentar um post
+- Votar em um comentário
+- Responder um comentário
+- Contatar a moderação
