@@ -3,6 +3,8 @@ import axios from "axios";
 import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
 
+require('dotenv').config();
+
 function Login() {
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
@@ -12,50 +14,28 @@ function Login() {
 
   const user = useContext(UserContext);
 
-
-  //FUNÇÃO DE LOGIN MOCKADA ENQUANTO N TENHO O ENDPOINT
-
-
   function loginUser(e) {
     e.preventDefault();
     if (email !== "") {
-
-      user.setEmail(email);
-      user.setId(id);
-      setEmail("");
-      setId("");
-      setPassword("");
-      setLoginError(false);
-      setRedirect(true);
-
-
+      const data = { email, password };
+      axios
+        .post(process.env.API_URL, data, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          user.setEmail(response.data.email);
+          user.setId(response.data.id);
+          setEmail("");
+          setId("");
+          setPassword("");
+          setLoginError(false);
+          setRedirect(true);
+        })
+        .catch(() => { });
     } else {
       setLoginError(true);
     }
   }
-
-  // function loginUser(e) {
-  //   e.preventDefault();
-  //   if (email !== "") {
-  //     const data = { email, password };
-  //     axios
-  //       .post("", data, {
-  //         withCredentials: true,
-  //       })
-  //       .then((response) => {
-  //         user.setEmail(response.data.email);
-  //         user.setId(response.data.id);
-  //         setEmail("");
-  //         setId("");
-  //         setPassword("");
-  //         setLoginError(false);
-  //         setRedirect(true);
-  //       })
-  //       .catch(() => { });
-  //   } else {
-  //     setLoginError(true);
-  //   }
-  // }
 
   if (redirect) {
     return <Navigate to={"/home"} />;
