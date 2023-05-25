@@ -2,7 +2,7 @@ import { HttpError } from "./httperror";
 
 export class InvalidParameterError extends HttpError {
     constructor(field: string, value: any) {
-        super(400, `Field '${field}' got invalue value '${value}'`);
+        super(400, `Field '${field}' got invalid value '${value}'`);
     }
 }
 

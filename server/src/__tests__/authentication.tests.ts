@@ -26,7 +26,7 @@ describe('Sign Up', () => {
                 } catch (error) {
                     expect(error).toBeInstanceOf(errors.InvalidParameterError);
                     if (error instanceof errors.InvalidParameterError) {
-                        expect(error.message).toBe( `Field 'username' got invalue value '${invalidUsername}'`);
+                        expect(error.message).toBe( `Field 'username' got invalid value '${invalidUsername}'`);
                     }
                 }
             }
@@ -47,7 +47,7 @@ describe('Sign Up', () => {
                 } catch (error) {
                     expect(error).toBeInstanceOf(errors.InvalidParameterError);
                     if (error instanceof errors.InvalidParameterError) {
-                        expect(error.message).toBe( `Field 'nickname' got invalue value '${invalidNickname}'`);
+                        expect(error.message).toBe( `Field 'nickname' got invalid value '${invalidNickname}'`);
                     }
                 }   
             }
@@ -68,7 +68,7 @@ describe('Sign Up', () => {
                 } catch (error) {
                     expect(error).toBeInstanceOf(errors.InvalidParameterError);
                     if (error instanceof errors.InvalidParameterError) {
-                        expect(error.message).toBe( `Field 'email' got invalue value '${invalidEmail}'`);
+                        expect(error.message).toBe( `Field 'email' got invalid value '${invalidEmail}'`);
                     }
                 }
             }
@@ -89,7 +89,7 @@ describe('Sign Up', () => {
                 } catch (error) {
                     expect(error).toBeInstanceOf(errors.InvalidParameterError);
                     if (error instanceof errors.InvalidParameterError) {
-                        expect(error.message).toBe( `Field 'password' got invalue value '${invalidPassword}'`);
+                        expect(error.message).toBe( `Field 'password' got invalid value '${invalidPassword}'`);
                     }
                 }
             }
