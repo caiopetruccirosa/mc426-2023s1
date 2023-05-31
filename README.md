@@ -13,3 +13,9 @@ Gabriel Gardini, 246289
 Luan Augusto Fazolin, 182236
 Paulo Vinícius Pinto, 242863
 Gustavo Eugenio John, 248318
+
+# Diagrama arquitetural (C4 - Nível 3)
+
+### Abaixo um diagrama em nível de componentes (C4 - Nível 3) para a arquitetura da aplicação.
+
+![ texto](images/C4-A1-v1.drawio.png)
