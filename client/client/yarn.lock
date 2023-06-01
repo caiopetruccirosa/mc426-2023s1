@@ -6494,6 +6494,11 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
+mdi-material-ui@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/mdi-material-ui/-/mdi-material-ui-7.7.0.tgz#6839e796e19457567322e90c9fd249c6afa53ee1"
+  integrity sha512-ABcksXoeJhOzy2rQCIEs0+j2K++wLOYAZcLX7mLyWaYycaDKFMcgqg8Up6xHcXxNNMSmggLcw/05fNFZE1LcIg==
+
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"

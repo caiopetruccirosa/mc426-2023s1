@@ -13,6 +13,7 @@ import Menu from "./Menu";
 import MC102 from "./MC102";
 import MC202 from "./MC202";
 import MC322 from "./MC322";
+import LoginTeste from "./Menu";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -47,33 +48,7 @@ function App() {
   // }
 
   return (
-    <UserContext.Provider value={{ email, setEmail, id, setId }}>
-      <BrowserRouter>
-        <nav>
-          <Link to={"/home"}>Home</Link>
-          {!email && (
-            <>
-              <Link to={"/login"}>Login</Link>
-              <Link to={"/register"}>Cadastro</Link>
-            </>
-          )}
-          {!!email && <a onClick={() => logout()}>Logout</a>}
-        </nav>
-        <Menu />
-        <main>
-          <Routes>
-            <Route path="/" element={<Info />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/MC102" element={<MC102 />} />
-            <Route path="/MC202" element={<MC202 />} />
-            <Route path="/MC322" element={<MC322 />} />
-          </Routes>
-        </main>
-
-      </BrowserRouter>
-    </UserContext.Provider>
+    <LoginTeste />
   );
 }
 

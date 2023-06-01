@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
+import { Box, Button, ButtonBase, Grid, TextField } from "@mui/material";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,6 @@ function Login() {
 
   //FUNÇÃO DE LOGIN MOCKADA ENQUANTO N TENHO O ENDPOINT
 
-
   function loginUser(e) {
     e.preventDefault();
     if (email !== "") {
@@ -25,12 +25,11 @@ function Login() {
       setEmail("");
       setId("");
       setPassword("");
-      setLoginError(false);
       setRedirect(true);
 
 
     } else {
-      setLoginError(true);
+      window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
     }
   }
 
@@ -63,41 +62,37 @@ function Login() {
 
   return (
     <>
-      <form action="" onSubmit={(e) => loginUser(e)}>
-        <h1>Bem Vindo!</h1>
-        <h2>Entre para acessar o fórum</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <p>Ainda não tem uma conta? Clique em Cadastro</p>
-        <button type="submit">Entrar</button>
-        {loginError && (
-          <div className={"error"}>
-            <h2
-              style={{
-                padding: 10,
-                marginTop: 150,
-                color: "red",
-                backgroundColor: "#f0f0f0",
-                borderRadius: 5,
-              }}
-            >
-              ERRO DE LOGIN! Email ou senha incorretos!
-            </h2>
-          </div>
-        )}
-      </form>
+      <Grid container sx={{ justifyContent: "center", }}>
+        <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
+          <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
+            <form action="" onSubmit={(e) => loginUser(e)}>
+              <h1>Bem Vindo!</h1>
+              <h2>Entre para acessar o fórum</h2>
+              <TextField
+                sx={{ mb: 2, backgroundColor: "white" }}
+                variant="outlined"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <TextField
+                sx={{ backgroundColor: "white" }}
+                variant="outlined"
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <p>Ainda não tem uma conta? Clique em Cadastro</p>
+              <Button variant="contained" type="submit" >Entrar</Button>
+            </form>
+          </Box>
+        </Grid>
+
+      </Grid>
     </>
   );
 }
