@@ -1,5 +1,5 @@
 import Post from '../models/post';
-import errors from '../utils/errors';
+import errors from '../errors';
 import db from './db'
 
 export const createPost = async (post: Post): Promise<Post> => {
@@ -10,7 +10,7 @@ export const createPost = async (post: Post): Promise<Post> => {
     )
     const rows = [...result]
     if (rows.length == 0)
-        throw Error(errors.DATABASE_ERROR)
+        throw new errors.DatabaseError();
 
     const postData = rows[0];
     post.id = postData.get('id')!.toString();
@@ -28,7 +28,7 @@ export const getPostById = async (id: string): Promise<Post> => {
 
     const rows = [...result]
     if (rows.length == 0)
-        throw Error(errors.POST_NOT_FOUND)
+        throw new errors.ResourceNotFound('Post');
     
     const postData = rows[0];
     return {
