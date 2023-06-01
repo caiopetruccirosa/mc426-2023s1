@@ -9,6 +9,11 @@ import axios from "axios";
 import Login from "./Login";
 import Home from "./Home";
 import Info from "./Info";
+import Menu from "./Menu";
+import MC102 from "./MC102";
+import MC202 from "./MC202";
+import MC322 from "./MC322";
+import LoginTeste from "./Menu";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -43,29 +48,7 @@ function App() {
   // }
 
   return (
-    <UserContext.Provider value={{ email, setEmail, id, setId }}>
-      <BrowserRouter>
-        <nav>
-          <Link to={"/home"}>Home</Link>
-          {!email && (
-            <>
-              <Link to={"/login"}>Login</Link>
-              <Link to={"/register"}>Cadastro</Link>
-            </>
-          )}
-          {!!email && <a onClick={() => logout()}>Logout</a>}
-        </nav>
-        <main>
-          <Routes>
-            <Route path="/" element={<Info />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
-
-      </BrowserRouter>
-    </UserContext.Provider>
+    <LoginTeste />
   );
 }
 
