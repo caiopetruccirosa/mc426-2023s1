@@ -1,98 +1,104 @@
-import {signUp, signIn} from '../services/authentication';
-import errors from '../utils/errors';
+import { signUp, signIn } from '../services/authentication';
+import errors from '../errors';
 
 // User with credentials that follow all the requirements
-const right_user_credentials = {
-  username: 'rightusertest',
-  nickname: 'Right User Test',
-  email: 'rightusertest@gmail.com',
-  password: 'RightP@ssw0rdTest'
+const rightUserCredentials = {
+    username: 'rightusertest',
+    nickname: 'Right User Test',
+    email: 'rightusertest@gmail.com',
+    password: 'RightP@ssw0rdTest'
 }
 
-// Sign-up tests
+describe('Sign Up', () => {
+    describe('Field Validations', () => {
+        it('should return an error if the username is invalid', async () => {
+            const invalidUsernames = ['João', '123abc', 'instituto.computacao', '456']
 
-describe('Authentication', () => {
-  describe('signUp', () => {
-    
-      it('should return an error if the username is invalid', async () => {
+            for (const invalidUsername of invalidUsernames) {
+                const user = {
+                    username: invalidUsername,
+                    nickname: rightUserCredentials.nickname,
+                    email: rightUserCredentials.email,
+                    password: rightUserCredentials.password
+                }
+                try {
+                    await signUp(user)
+                } catch (error) {
+                    expect(error).toBeInstanceOf(errors.InvalidParameterError);
+                    if (error instanceof errors.InvalidParameterError) {
+                        expect(error.message).toBe( `Field 'username' got invalid value '${invalidUsername}'`);
+                    }
+                }
+            }
+        });
 
-          const invalidUsernames = ['João', '123abc', 'instituto.computacao', '456']
+        it('should return an error if the nickname is invalid', async () => {
+            const invalidNicknames = ['User Test1', 'User Test 2', '123', 'User#Test']
 
-          for (const invalidUsername of invalidUsernames) {
-              const user = {
-                  username: invalidUsername,
-                  nickname: right_user_credentials.nickname,
-                  email: right_user_credentials.email,
-                  password: right_user_credentials.password
-              }
-              try {
-                  await signUp(user)
-              } catch (error) {
-                  expect(error.message).toBe(errors.INVALID_USERNAME)
-              }
-          }
-      })
+            for (const invalidNickname of invalidNicknames) {
+                const user = {
+                    username: rightUserCredentials.username,
+                    nickname: invalidNickname,
+                    email: rightUserCredentials.email,
+                    password: rightUserCredentials.password
+                }
+                try {
+                    await signUp(user)
+                } catch (error) {
+                    expect(error).toBeInstanceOf(errors.InvalidParameterError);
+                    if (error instanceof errors.InvalidParameterError) {
+                        expect(error.message).toBe( `Field 'nickname' got invalid value '${invalidNickname}'`);
+                    }
+                }   
+            }
+        });
 
-      it('should return an error if the nickname is invalid', async () => {
+        it('should return an error if the email is invalid', async () => {
+            const invalidEmails = ['Email', '@teste.com', '123@', 'User#Test', 'instituto.computacao.com@']
 
-          const invalidNicknames = ['User Test1', 'User Test 2', '123', 'User#Test']
+            for (const invalidEmail of invalidEmails) {
+                const user = {
+                    username: rightUserCredentials.username,
+                    nickname: rightUserCredentials.nickname,
+                    email: invalidEmail,
+                    password: rightUserCredentials.password
+                }
+                try {
+                    await signUp(user)
+                } catch (error) {
+                    expect(error).toBeInstanceOf(errors.InvalidParameterError);
+                    if (error instanceof errors.InvalidParameterError) {
+                        expect(error.message).toBe( `Field 'email' got invalid value '${invalidEmail}'`);
+                    }
+                }
+            }
+        });
 
-          for (const invalidNickname of invalidNicknames) {
-              const user = {
-                  username: right_user_credentials.username,
-                  nickname: invalidNickname,
-                  email: right_user_credentials.email,
-                  password: right_user_credentials.password
-              }
-              try {
-                  await signUp(user)
-              } catch (error) {
-                  expect(error.message).toBe(errors.INVALID_NICKNAME)
-              }
-          }
-      })
+        it('should return an error if the password is invalid', async () => {
+            const invalidPasswords = ['12345', 'abcde', 'ABCD', '!@#$&', 'Abc12']
 
-      it('should return an error if the email is invalid', async () => {
-
-          const invalidEmails = ['Email', '@teste.com', '123@', 'User#Test', 'instituto.computacao.com@']
-
-          for (const invalidEmail of invalidEmails) {
-              const user = {
-                  username: right_user_credentials.username,
-                  nickname: right_user_credentials.nickname,
-                  email: invalidEmail,
-                  password: right_user_credentials.password
-              }
-              try {
-                  await signUp(user)
-              } catch (error) {
-                  expect(error.message).toBe(errors.INVALID_EMAIL)
-              }
-          }
-      })
-
-      it('should return an error if the password is invalid', async () => {
-          const invalidPasswords = ['12345', 'abcde', 'ABCD', '!@#$&', 'Abc12']
-
-          for (const invalidPassword of invalidPasswords) {
-              const user = {
-                  username: right_user_credentials.username,
-                  nickname: right_user_credentials.nickname,
-                  email: right_user_credentials.email,
-                  password: invalidPassword
-              }
-              try {
-                  await signUp(user)
-              } catch (error) {
-                  expect(error.message).toBe(errors.INVALID_PASSWORD)
-              }
-          }
-      })
-	})
+            for (const invalidPassword of invalidPasswords) {
+                const user = {
+                    username: rightUserCredentials.username,
+                    nickname: rightUserCredentials.nickname,
+                    email: rightUserCredentials.email,
+                    password: invalidPassword
+                }
+                try {
+                    await signUp(user)
+                } catch (error) {
+                    expect(error).toBeInstanceOf(errors.InvalidParameterError);
+                    if (error instanceof errors.InvalidParameterError) {
+                        expect(error.message).toBe( `Field 'password' got invalid value '${invalidPassword}'`);
+                    }
+                }
+            }
+        });
+    });
 })
 
 //       it('should create a new user if all information is valid', async () => {
-//           const user = right_user_credentials
+//           const user = rightUserCredentials
 //           const response = await signUp(user)
 //           expect(response.username).toBe(user.username)
 //           expect(response.nickname).toBe(user.nickname)
@@ -104,7 +110,7 @@ describe('Authentication', () => {
 
 
 //   it('should return an error if the user already exists', async () => {
-//       const user = right_user_credentials
+//       const user = rightUserCredentials
 //       await signUp(user)
 //       try {
 //           await signUp(user)
@@ -131,8 +137,8 @@ describe('Authentication', () => {
 
 //       it('should return an error if the password is incorrect', async () => {
 //           const credentials = {
-//               username: right_user_credentials.username,
-//               password: 'WRONG' + right_user_credentials.password
+//               username: rightUserCredentials.username,
+//               password: 'WRONG' + rightUserCredentials.password
 //           }
 //           try {
 //               await signIn(credentials.username, credentials.password)
@@ -142,7 +148,7 @@ describe('Authentication', () => {
 //       })
 
 //       it('should sign in the user if credentials are correct', async () => {
-//           const user = right_user_credentials
+//           const user = rightUserCredentials
 //           const response = await signIn(user.username, user.password)
 //           expect(response.username).toBe(user.username)
 //           expect(response.nickname).toBe(user.nickname)

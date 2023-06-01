@@ -1,5 +1,5 @@
 import User from '../models/user';
-import errors from '../utils/errors';
+import errors from '../errors';
 import db from './db'
 
 export const createUser = async (user: User) => {
@@ -7,7 +7,7 @@ export const createUser = async (user: User) => {
     await client.query(
         'INSERT INTO user (username, nickname, email, salt, password, role) VALUES ($1, $2, $3, $4, $5, $6)',
         [user.username, user.nickname, user.email, user.salt!, user.password!, user.role!]
-    )
+    );
 };
 
 export const existsUserByUsername = async (username: string): Promise<boolean> => {
@@ -16,7 +16,7 @@ export const existsUserByUsername = async (username: string): Promise<boolean> =
         'SELECT EXISTS(SELECT username FROM user WHERE username = $1) as "exists"',
         [username]
     );
-    const rows = [...result]
+    const rows = [...result];
     return rows[0].get("exists")!.valueOf() as boolean;
 };
 
@@ -27,9 +27,9 @@ export const getUserByUsername = async (username: string): Promise<User> => {
         [username]
     );
 
-    const rows = [...result]
+    const rows = [...result];
     if (rows.length == 0)
-        throw Error(errors.USER_NOT_FOUND)
+        throw new errors.ResourceNotFound('User');
     
     const userData = rows[0];
     return {
@@ -39,6 +39,6 @@ export const getUserByUsername = async (username: string): Promise<User> => {
         role: userData.get('role')!.toString(),
         salt: userData.get('salt')!.toString(),
         password: userData.get('password')!.toString(),
-    }
+    };
 };
 
