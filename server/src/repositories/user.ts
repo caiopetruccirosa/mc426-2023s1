@@ -2,10 +2,12 @@ import User from '../models/user';
 import errors from '../utils/errors';
 import db from './db'
 
+const USER_TABLE = '"user"';
+
 export const createUser = async (user: User) => {
     const client = await db.acquire()
     await client.query(
-        'INSERT INTO user (username, nickname, email, salt, password, role) VALUES ($1, $2, $3, $4, $5, $6)',
+        `INSERT INTO ${USER_TABLE} (username, nickname, email, salt, password, role) VALUES ($1, $2, $3, $4, $5, $6);`,
         [user.username, user.nickname, user.email, user.salt!, user.password!, user.role!]
     )
 };
@@ -13,7 +15,7 @@ export const createUser = async (user: User) => {
 export const existsUserByUsername = async (username: string): Promise<boolean> => {
     const client = await db.acquire();
     const result = await client.query(
-        'SELECT EXISTS(SELECT username FROM user WHERE username = $1) as "exists"',
+        `SELECT EXISTS(SELECT username FROM ${USER_TABLE} WHERE username = $1) as "exists";`,
         [username]
     );
     const rows = [...result]
@@ -23,7 +25,7 @@ export const existsUserByUsername = async (username: string): Promise<boolean> =
 export const getUserByUsername = async (username: string): Promise<User> => {
     const client = await db.acquire();
     const result = await client.query(
-        'SELECT username, nickname, email, role, salt, password FROM user WHERE username = $1',
+        `SELECT username, nickname, email, role, salt, password FROM ${USER_TABLE} WHERE username = $1;`,
         [username]
     );
 
