@@ -28,6 +28,8 @@ import axios from 'axios';
 import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
+import { Navigate } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -71,6 +73,14 @@ function ResponsiveDrawer(props) {
   //   })
   // }
 
+
+const NavigateTo = (route) =>{
+  console.log(route)
+  return <Navigate to={route} />;
+
+}
+
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -78,12 +88,11 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar><h1>Wiki + Fórum</h1></Toolbar>
-
       <Divider />
       <List>
         {items.map((item, index) => (
-          <a href={item.route} style={{ color: 'black', width: "100%", padding: 0, textDecoration: "none" }}>
-            <ListItem key={index} disablePadding>
+
+            <ListItem key={index} disablePadding onClick={()=>NavigateTo(item.route)}>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -91,7 +100,6 @@ function ResponsiveDrawer(props) {
                 <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
-          </a>
         ))}
       </List>
       <Divider />
@@ -162,8 +170,7 @@ function ResponsiveDrawer(props) {
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
-        <UserContext.Provider value={{ email, setEmail, id, setId }}>
-          <BrowserRouter>
+        
             <nav>
               <Link to={"/home"}>Home</Link>
               {!email && (
@@ -188,8 +195,7 @@ function ResponsiveDrawer(props) {
               </Routes>
             </main>
 
-          </BrowserRouter>
-        </UserContext.Provider>
+         
       </Box>
     </Box>
   );
