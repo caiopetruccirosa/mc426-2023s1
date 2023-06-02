@@ -10,6 +10,7 @@ export const createUser = async (user: User) => {
         `INSERT INTO ${USER_TABLE} (username, nickname, email, salt, password, role) VALUES ($1, $2, $3, $4, $5, $6);`,
         [user.username, user.nickname, user.email, user.salt!, user.password!, user.role!]
     );
+    await db.release(client)
 };
 
 export const existsUserByUsername = async (username: string): Promise<boolean> => {
@@ -18,6 +19,7 @@ export const existsUserByUsername = async (username: string): Promise<boolean> =
         `SELECT EXISTS(SELECT username FROM ${USER_TABLE} WHERE username = $1) as "exists";`,
         [username]
     );
+    await db.release(client)
     const rows = [...result];
     return rows[0].get("exists")!.valueOf() as boolean;
 };
@@ -28,7 +30,7 @@ export const getUserByUsername = async (username: string): Promise<User> => {
         `SELECT username, nickname, email, role, salt, password FROM ${USER_TABLE} WHERE username = $1;`,
         [username]
     );
-
+    await db.release(client)
     const rows = [...result];
     if (rows.length == 0)
         throw new errors.ResourceNotFound('User');
