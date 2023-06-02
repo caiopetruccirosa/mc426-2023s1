@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "./UserContext";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { Box } from "@mui/material";
 
 function MC102() {
 
@@ -30,16 +32,27 @@ function MC102() {
     //             setTitle('');
     //         })
     // }
+    const markdown = [
+        `# Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
+        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
+        `### Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
+        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
+        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
+        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
+    ]
+
 
     return (
         <>
-            <form onSubmit={e => addPostagem(e)}>
+            <Box sx={{ display: "flex", flexDirection: "column", }}>
                 <h1>Mc102</h1>
-                <input placeholder={'Título'} value={title} onChange={e => setTitle(e.target.value)} />
-                <input style={{ height: "150px", textAlign: "center", }} placeholder={'Conteúdo'} value={text} onChange={e => setText(e.target.value)} />
-                <button type="submit">Enviar</button>
+                {markdown.map((item) => (
 
-            </form>
+                    <ReactMarkdown children={item} />
+                ))}
+            </Box>
+
+
         </>
     )
 }

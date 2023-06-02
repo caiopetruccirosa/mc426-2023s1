@@ -32,12 +32,18 @@ import { Navigate } from "react-router-dom";
 
 
 const drawerWidth = 240;
+const appBarHeight = "60px";
 
 function ResponsiveDrawer(props) {
   const items = [
     { title: "MC102", route: "/MC102" },
     { title: "MC202", route: "/MC202" },
     { title: "MC322", route: "/MC322" },
+  ]
+  const loginItems = [
+    { title: "Home", route: "/home" },
+    { title: "Login", route: "/login" },
+    { title: "Cadastro", route: "/register" },
   ]
 
   const { window } = props;
@@ -73,14 +79,6 @@ function ResponsiveDrawer(props) {
   //   })
   // }
 
-
-const NavigateTo = (route) =>{
-  console.log(route)
-  return <Navigate to={route} />;
-
-}
-
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -89,10 +87,11 @@ const NavigateTo = (route) =>{
     <div>
       <Toolbar><h1>Wiki + Fórum</h1></Toolbar>
       <Divider />
-      <List>
-        {items.map((item, index) => (
 
-            <ListItem key={index} disablePadding onClick={()=>NavigateTo(item.route)}>
+      <List>
+        {loginItems.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -100,6 +99,22 @@ const NavigateTo = (route) =>{
                 <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
+          </Link >
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {items.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link >
         ))}
       </List>
       <Divider />
@@ -113,7 +128,6 @@ const NavigateTo = (route) =>{
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
-        position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
@@ -168,36 +182,23 @@ const NavigateTo = (route) =>{
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
       >
-        
-            <nav>
-              <Link to={"/home"}>Home</Link>
-              {!email && (
-                <>
-                  <Link to={"/login"}>Login</Link>
-                  <Link to={"/register"}>Cadastro</Link>
-                </>
-              )}
-              {!!email && <a onClick={() => logout()}>Logout</a>}
-            </nav>
-            <main>
-              <Routes>
-                <Route path="/" element={<Info />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                {/* <Route path="/login" element={<LoginTeste />} /> */}
-                <Route path="/MC102" element={<MC102 />} />
-                <Route path="/MC202" element={<MC202 />} />
-                <Route path="/MC322" element={<MC322 />} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Info />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/MC102" element={<MC102 />} />
+            <Route path="/MC202" element={<MC202 />} />
+            <Route path="/MC322" element={<MC322 />} />
+          </Routes>
+        </main>
 
-              </Routes>
-            </main>
 
-         
       </Box>
-    </Box>
+    </Box >
   );
 }
 

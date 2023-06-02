@@ -50,7 +50,7 @@ function App() {
     <UserContext.Provider value={{ email, setEmail, id, setId }}>
       <BrowserRouter>
         <Menu />
-     </BrowserRouter>
+      </BrowserRouter>
     </UserContext.Provider>
   );
 }
