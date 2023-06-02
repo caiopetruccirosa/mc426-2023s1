@@ -13,7 +13,6 @@ import Menu from "./Menu";
 import MC102 from "./MC102";
 import MC202 from "./MC202";
 import MC322 from "./MC322";
-import LoginTeste from "./Menu";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -48,7 +47,11 @@ function App() {
   // }
 
   return (
-    <LoginTeste />
+    <UserContext.Provider value={{ email, setEmail, id, setId }}>
+      <BrowserRouter>
+        <Menu />
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

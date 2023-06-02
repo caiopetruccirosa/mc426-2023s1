@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from 'axios';
 import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
+import { Box, Button, Grid, TextField } from "@mui/material";
 
 
 function Register() {
@@ -58,13 +59,36 @@ function Register() {
     // }
 
     return (
-        <form action="" onSubmit={e => registerUser(e)}>
-            <h1>Bem Vindo!</h1>
-            <h2>Crie uma conta para acessar o fórum!</h2>
-            <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} /><br />
-            <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} /><br />
-            <button type="submit">Cadastrar</button>
-        </form>
+        <Grid container sx={{ justifyContent: "center", }}>
+        <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
+          <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
+            <form action="" onSubmit={e => registerUser(e)}>
+              <h1>Bem Vindo!</h1>
+              <h2>Crie uma conta para acessar o fórum!</h2>
+              <TextField
+                sx={{ mb: 2, backgroundColor: "white" }}
+                variant="outlined"
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <TextField
+                sx={{ backgroundColor: "white" }}
+                variant="outlined"
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <Button sx={{mt:2}} variant="contained" type="submit" >Cadastrar</Button>
+            </form>
+          </Box>
+        </Grid>
+
+      </Grid>
     )
 }
 

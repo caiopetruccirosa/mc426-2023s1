@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "./UserContext";
+import { Box, Button, Grid, TextField } from "@mui/material";
 
 function Home() {
 
     const userInfo = useContext(UserContext);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+
 
 
     if (!userInfo.email) {
@@ -31,15 +33,51 @@ function Home() {
     //         })
     // }
 
+
+
+
+    //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
+
+
+    function registerUser(e) {
+        e.preventDefault();
+
+
+    }
+
+
     return (
         <>
-            <form onSubmit={e => addPostagem(e)}>
-                <h1>Criar postagem</h1>
-                <input placeholder={'Título'} value={title} onChange={e => setTitle(e.target.value)} />
-                <input style={{ height: "150px", textAlign: "center", }} placeholder={'Conteúdo'} value={text} onChange={e => setText(e.target.value)} />
-                <button type="submit">Enviar</button>
+            <Grid container sx={{ justifyContent: "center", }}>
+                <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
+                    <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
+                        <form action="" onSubmit={e => registerUser(e)}>
+                            <h1>Criar Postagem!</h1>
+                            <TextField
+                                sx={{ mb: 2, backgroundColor: "white" }}
+                                variant="outlined"
+                                type="text"
+                                placeholder="title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                            <br />
+                            <TextField
+                                sx={{ backgroundColor: "white", }}
+                                variant="outlined"
+                                type="text"
+                                multiline
+                                placeholder="texto"
+                                value={text}
+                                onChange={(e) => setText(e.target.value)}
+                            />
+                            <br />
+                            <Button sx={{ mt: 2 }} variant="contained" type="submit" >Enviar</Button>
+                        </form>
+                    </Box>
+                </Grid>
 
-            </form>
+            </Grid>
         </>
     )
 }
