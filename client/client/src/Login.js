@@ -4,8 +4,6 @@ import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
 import { Box, Button, ButtonBase, Grid, TextField } from "@mui/material";
 
-require('dotenv').config();
-
 function Login() {
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
@@ -18,20 +16,43 @@ function Login() {
 
   //FUNÇÃO DE LOGIN MOCKADA ENQUANTO N TENHO O ENDPOINT
 
-  function loginUser(e) {
+  // function loginUser(e) {
+  //   e.preventDefault();
+  //   if (email !== "") {
+
+  //     user.setEmail(email);
+  //     user.setId(id);
+  //     setEmail("");
+  //     setId("");
+  //     setPassword("");
+  //     setRedirect(true);
+
+
+  //   } else {
+  //     window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
+  //   }
+  // }
+
+function loginUser(e) {
     e.preventDefault();
     if (email !== "") {
-
-      user.setEmail(email);
-      user.setId(id);
-      setEmail("");
-      setId("");
-      setPassword("");
-      setRedirect(true);
-
-
+      const data = { email, password };
+      axios
+        .post(`http://localhost:3000/auth/signin`, data, {
+          withCredentials: false,
+        })
+        .then((response) => {
+          user.setEmail(response.data.email);
+          user.setId(response.data.id);
+          setEmail("");
+          setId("");
+          setPassword("");
+          setLoginError(false);
+          setRedirect(true);
+        })
+        .catch(() => { });
     } else {
-      window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
+      setLoginError(true);
     }
   }
 
