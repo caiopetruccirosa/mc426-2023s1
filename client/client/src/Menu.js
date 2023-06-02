@@ -28,14 +28,22 @@ import axios from 'axios';
 import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
+import { Navigate } from "react-router-dom";
+
 
 const drawerWidth = 240;
+const appBarHeight = "60px";
 
 function ResponsiveDrawer(props) {
   const items = [
     { title: "MC102", route: "/MC102" },
     { title: "MC202", route: "/MC202" },
     { title: "MC322", route: "/MC322" },
+  ]
+  const loginItems = [
+    { title: "Home", route: "/home" },
+    { title: "Login", route: "/login" },
+    { title: "Cadastro", route: "/register" },
   ]
 
   const { window } = props;
@@ -78,12 +86,12 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar><h1>Wiki + Fórum</h1></Toolbar>
-
       <Divider />
+
       <List>
-        {items.map((item, index) => (
-          <a href={item.route} style={{ color: 'black', width: "100%", padding: 0, textDecoration: "none" }}>
-            <ListItem key={index} disablePadding>
+        {loginItems.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -91,7 +99,22 @@ function ResponsiveDrawer(props) {
                 <ListItemText primary={item.title} />
               </ListItemButton>
             </ListItem>
-          </a>
+          </Link >
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {items.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link >
         ))}
       </List>
       <Divider />
@@ -105,7 +128,6 @@ function ResponsiveDrawer(props) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
-        position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
@@ -160,38 +182,23 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
       >
-        <UserContext.Provider value={{ email, setEmail, id, setId }}>
-          <BrowserRouter>
-            <nav>
-              <Link to={"/home"}>Home</Link>
-              {!email && (
-                <>
-                  <Link to={"/login"}>Login</Link>
-                  <Link to={"/register"}>Cadastro</Link>
-                </>
-              )}
-              {!!email && <a onClick={() => logout()}>Logout</a>}
-            </nav>
-            <main>
-              <Routes>
-                <Route path="/" element={<Info />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                {/* <Route path="/login" element={<LoginTeste />} /> */}
-                <Route path="/MC102" element={<MC102 />} />
-                <Route path="/MC202" element={<MC202 />} />
-                <Route path="/MC322" element={<MC322 />} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Info />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/MC102" element={<MC102 />} />
+            <Route path="/MC202" element={<MC202 />} />
+            <Route path="/MC322" element={<MC322 />} />
+          </Routes>
+        </main>
 
-              </Routes>
-            </main>
 
-          </BrowserRouter>
-        </UserContext.Provider>
       </Box>
-    </Box>
+    </Box >
   );
 }
 
