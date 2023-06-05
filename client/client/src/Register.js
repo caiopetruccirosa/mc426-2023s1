@@ -8,6 +8,8 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 function Register() {
 
     const [email, setEmail] = useState('');
+    const [nickname, setNickname] = useState('');
+    const [username, setUsername] = useState('');
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
@@ -18,20 +20,45 @@ function Register() {
     //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
 
-    function registerUser(e) {
-        e.preventDefault();
+    // function registerUser(e) {
+    //     e.preventDefault();
 
-        if (email !== "") {
+    //     if (email !== "") {
 
-            user.setEmail(email);
-            user.setId(id);
-            setEmail("");
-            setId("");
-            setPassword("");
-            setRedirect(true);
+    //         user.setEmail(email);
+    //         user.setId(id);
+    //         setEmail("");
+    //         setId("");
+    //         setPassword("");
+    //         setRedirect(true);
 
-        }
+    //     }
+    // }
+
+function registerUser(e) {
+    e.preventDefault();
+    if (email !== "") {
+      const data = { email, username, nickname, password };
+      axios
+        .post(`http://localhost:3000/auth/signup`, data, {
+          withCredentials: false,
+        })
+        .then((response) => {
+          user.setEmail(response.data.email);
+          user.setNickname(response.data.nickname);
+          user.setUsername(response.data.username);
+          user.setId(response.data.id);
+          setEmail("");
+          setNickname("");
+          setUsername("");
+          setId("");
+          setPassword("");
+          setRedirect(true);
+        })
+        .catch(() => { });
+    } else {
     }
+  }
 
 
     if (redirect) {
@@ -71,6 +98,24 @@ function Register() {
                 type="email"
                 placeholder="Email"
                 value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <TextField
+                sx={{ mb: 2, backgroundColor: "white" }}
+                variant="outlined"
+                type="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <TextField
+                sx={{ mb: 2, backgroundColor: "white" }}
+                variant="outlined"
+                type="nickname"
+                placeholder="Nickname"
+                value={nickname}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <br />
