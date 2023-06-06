@@ -1,44 +1,21 @@
-.PHONY: server
-.PHONY: client
-.PHONY: db
+.PHONY: all client server build_client build_server down clean
 
-DOCKER_COMPOSE=$(shell which docker-compose)
-NPM=$(shell which npm)
-YARN=$(shell which yarn)
-DB_LOG_DIR=logs/db
-CLIENT_LOG_DIR=logs/client
-SERVER_LOG_DIR=logs/server
+all: client server
 
-define start_server = 
-	${NPM} --prefix server/ run dev > /dev/null 2> ${SERVER_LOG_DIR}/log.txt &
-endef
+client: build_client
+	docker-compose run --rm client yarn start
 
-# SERVER_PROCESS = wiki_forum_server
-# CLIENT_PROCESS = wiki_forum_client
-# DB_PROCESS = wiki_forum_db
+server: build_server
+	docker-compose run --rm server npm run dev
 
-# ac:
-# 	yarn --cwd client/client start& npm --prefix server/ run dev& docker-compose -f db/docker-compose.yaml -d
+build_client: 
+	docker-compose run --rm client yarn install
 
-init:
-	mkdir -p ${DB_LOG_DIR} ${CLIENT_LOG_DIR} ${SERVER_LOG_DIR}
+build_server: 
+	docker-compose run --rm server npm install
 
-run: init db server client
-
-db: init
-	@echo "Starting db..."
-	docker compose -f db/docker-compose.yaml up -d
-	@echo "PostgreSQL initiated."
-
-server: init
-	@echo "Starting server..."
-	@nohup npm --prefix server/ run dev > /dev/null 2> ${SERVER_LOG_DIR}/log.txt &
-	@echo "Server initiated."
-
-client: init
-	@nohup yarn --cwd client/client start 2> ${CLIENT_LOG_DIR}/log.txt &
-	@echo "Client initiated."
+down:
+	docker-compose down
 
 clean:
-	rm -rf logs/
-	docker-compose -f db/docker-compose.yaml down --volumes
+	docker-compose down --volumes

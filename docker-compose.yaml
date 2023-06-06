@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: '3'
+services:
+  client:
+    image: node:20-bullseye
+    volumes:
+      - ./client/client/:/client
+    working_dir: /client
+    entrypoint: yarn
+    command: start
+  server:
+    image: node:20-bullseye
+    volumes:
+      - ./server/:/server
+    working_dir: /server
+    entrypoint: npm
+    command:
+      - run
+      - dev
