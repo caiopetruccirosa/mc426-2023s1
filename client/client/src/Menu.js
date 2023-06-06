@@ -29,6 +29,7 @@ import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
 import { Navigate } from "react-router-dom";
+import CreatePost from './CreatePage';
 
 
 const drawerWidth = 240;
@@ -44,6 +45,7 @@ function ResponsiveDrawer(props) {
     { title: "Home", route: "/home" },
     { title: "Login", route: "/login" },
     { title: "Cadastro", route: "/register" },
+    { title: "Criar página", route: "/create-page" },
   ]
 
   const { window } = props;
@@ -182,13 +184,14 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
+        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
       >
         <main>
           <Routes>
             <Route path="/" element={<Info />} />
             <Route path="/home" element={<Home />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/create-page" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/MC102" element={<MC102 />} />
             <Route path="/MC202" element={<MC202 />} />

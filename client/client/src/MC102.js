@@ -17,42 +17,14 @@ function MC102() {
 
     //FUNÇAÕ MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
-    function addPostagem(e) {
-        e.preventDefault();
-        if (title && text && userInfo.email) {
-            window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.email)
-        }
-    }
-
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
-    const markdown = [
-        `# Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
-        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
-        `### Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
-        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
-        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
-        `## Getting Started   with Create React App <br/>This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). ## Available Scripts`,
-    ]
-
-
+    const texto = userInfo.text
     return (
         <>
-            <Box sx={{ display: "flex", flexDirection: "column", }}>
+            <Box sx={{ display: "flex", flexDirection: "column", textAlign: "left", bgcolor: "#cfe2e8", marginX: 2 }}>
                 <h1>Mc102</h1>
-                {markdown.map((item) => (
-
-                    <ReactMarkdown children={item} />
-                ))}
+                {/* <ReactMarkdown children={texto} /> */}
+                <div dangerouslySetInnerHTML={{ __html: texto }}></div>
             </Box>
-
-
         </>
     )
 }
