@@ -17,7 +17,7 @@ function CreatePost() {
 
 
 
-    if (!userInfo.email) {
+    if (!userInfo.username) {
         return 'Você precisa fazer login para acessar essa página!';
     }
 

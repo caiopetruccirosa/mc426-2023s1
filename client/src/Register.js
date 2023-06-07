@@ -6,36 +6,35 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 
 function Register() {
 
-    const [email, setEmail] = useState('');
-    const [nickname, setNickname] = useState('');
-    const [username, setUsername] = useState('');
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
+  const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [username, setUsername] = useState('');
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
 
 
-    const user = useContext(UserContext);
+  const user = useContext(UserContext);
 
-    //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
+  //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
 
-    // function registerUser(e) {
-    //     e.preventDefault();
+  // function registerUser(e) {
+  //     e.preventDefault();
 
-    //     if (email !== "") {
+  //     if (email !== "") {
 
-    //         user.setEmail(email);
-    //         user.setId(id);
-    //         setEmail("");
-    //         setId("");
-    //         setPassword("");
-    //         setRedirect(true);
+  //         user.setEmail(email);
+  //         user.setId(id);
+  //         setEmail("");
+  //         setId("");
+  //         setPassword("");
+  //         setRedirect(true);
 
-    //     }
-    // }
+  //     }
+  // }
 
-function registerUser(e) {
-    console.log("Entrou aqui")
+  function registerUser(e) {
     e.preventDefault();
     if (email !== "") {
       const data = { email, username, nickname, password };
@@ -45,10 +44,8 @@ function registerUser(e) {
         })
         .then((response) => {
           console.log(response)
-          user.setEmail(response.data.email);
-          user.setNickname(response.data.nickname);
-          user.setUsername(response.data.username);
-          user.setId(response.data.id);
+          user.setUsername(username);
+          user.setId(id);
           setEmail("");
           setNickname("");
           setUsername("");
@@ -56,69 +53,69 @@ function registerUser(e) {
           setPassword("");
           setRedirect(true);
         })
-        .catch((error) => { 
-                    console.log(error)
-                    window.alert(`Erro: ${error.response.data.message}`) 
-                });
+        .catch((error) => {
+          console.log(error)
+          window.alert(`Erro: ${error.response.data.message}`)
+        });
     } else {
     }
   }
 
 
-    if (redirect) {
-        return <Navigate to={"/home"} />;
-    }
+  if (redirect) {
+    return <Navigate to={"/home"} />;
+  }
 
-    return (
-        <Grid container sx={{ justifyContent: "center", }}>
-        <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
-          <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
-            <form action="" onSubmit={e => registerUser(e)}>
-              <h1>Bem Vindo!</h1>
-              <h2>Crie uma conta para acessar o fórum!</h2>
-              <TextField
-                sx={{ mb: 2, backgroundColor: "white" }}
-                variant="outlined"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <br />
-              <TextField
-                sx={{ mb: 2, backgroundColor: "white" }}
-                variant="outlined"
-                type="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <br />
-              <TextField
-                sx={{ mb: 2, backgroundColor: "white" }}
-                variant="outlined"
-                type="nickname"
-                placeholder="Nickname"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-              />
-              <br />
-              <TextField
-                sx={{ backgroundColor: "white" }}
-                variant="outlined"
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <br />
-              <Button sx={{mt:2}} variant="contained" type="submit" >Cadastrar</Button>
-            </form>
-          </Box>
-        </Grid>
-
+  return (
+    <Grid container sx={{ justifyContent: "center", }}>
+      <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
+        <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
+          <form action="" onSubmit={e => registerUser(e)}>
+            <h1>Bem Vindo!</h1>
+            <h2>Crie uma conta para acessar o fórum!</h2>
+            <TextField
+              sx={{ mb: 2, backgroundColor: "white" }}
+              variant="outlined"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+            <TextField
+              sx={{ mb: 2, backgroundColor: "white" }}
+              variant="outlined"
+              type="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <br />
+            <TextField
+              sx={{ mb: 2, backgroundColor: "white" }}
+              variant="outlined"
+              type="nickname"
+              placeholder="Nickname"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+            <br />
+            <TextField
+              sx={{ backgroundColor: "white" }}
+              variant="outlined"
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <br />
+            <Button sx={{ mt: 2 }} variant="contained" type="submit" >Cadastrar</Button>
+          </form>
+        </Box>
       </Grid>
-    )
+
+    </Grid>
+  )
 }
 
 export default Register;
