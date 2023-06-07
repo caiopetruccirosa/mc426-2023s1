@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { Box, Button, ButtonBase, Grid, TextField } from "@mui/material";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
@@ -16,45 +16,48 @@ function Login() {
 
   //FUNÇÃO DE LOGIN MOCKADA ENQUANTO N TENHO O ENDPOINT
 
-  function loginUser(e) {
-    e.preventDefault();
-    if (email !== "") {
-
-      user.setEmail(email);
-      user.setId(id);
-      setEmail("");
-      setId("");
-      setPassword("");
-      setRedirect(true);
-
-
-    } else {
-      window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
-    }
-  }
-
   // function loginUser(e) {
   //   e.preventDefault();
   //   if (email !== "") {
-  //     const data = { email, password };
-  //     axios
-  //       .post("", data, {
-  //         withCredentials: true,
-  //       })
-  //       .then((response) => {
-  //         user.setEmail(response.data.email);
-  //         user.setId(response.data.id);
-  //         setEmail("");
-  //         setId("");
-  //         setPassword("");
-  //         setLoginError(false);
-  //         setRedirect(true);
-  //       })
-  //       .catch(() => { });
+
+  //     user.setEmail(email);
+  //     user.setId(id);
+  //     setEmail("");
+  //     setId("");
+  //     setPassword("");
+  //     setRedirect(true);
+
+
   //   } else {
-  //     setLoginError(true);
+  //     window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
   //   }
   // }
+
+function loginUser(e) {
+    e.preventDefault();
+    if (username !== "") {
+      const data = { username, password };
+      axios
+        .post('/api/auth/signin', data, {
+          withCredentials: false,
+        })
+        .then((response) => {
+          user.setUsername(response.data.username);
+          user.setId(response.data.id);
+          setUsername("");
+          setId("");
+          setPassword("");
+          setLoginError(false);
+          setRedirect(true);
+        })
+        .catch((error) => { 
+                    console.log(error)
+                    window.alert(`Erro: ${error.response.data.message}`) 
+                });
+    } else {
+      setLoginError(true);
+    }
+  }
 
   if (redirect) {
     return <Navigate to={"/home"} />;
@@ -71,10 +74,10 @@ function Login() {
               <TextField
                 sx={{ mb: 2, backgroundColor: "white" }}
                 variant="outlined"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <br />
               <TextField
