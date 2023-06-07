@@ -17,6 +17,7 @@ import MC322 from "./MC322";
 function App() {
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
+  const [text, setText] = useState("");
   const userInfo = useContext(UserContext);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function App() {
   // }
 
   return (
-    <UserContext.Provider value={{ email, setEmail, id, setId }}>
+    <UserContext.Provider value={{ email, setEmail, id, setId, text, setText }}>
       <BrowserRouter>
         <Menu />
       </BrowserRouter>
