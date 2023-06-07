@@ -56,7 +56,10 @@ function registerUser(e) {
           setPassword("");
           setRedirect(true);
         })
-        .catch(() => { });
+        .catch((error) => { 
+                    console.log(error)
+                    window.alert(`Erro: ${error.response.data.message}`) 
+                });
     } else {
     }
   }

@@ -1,6 +1,6 @@
 .PHONY: up db client server build_client build_server down clean
 
-up: install_client install_server
+up: build_client install_client install_server
 	docker compose up
 
 client: build_client install_client
