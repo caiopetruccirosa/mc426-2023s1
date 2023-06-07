@@ -1,9 +1,9 @@
 .PHONY: up db client server build_client build_server down clean
 
-up: build_client install_client install_server
+up: install_client install_server
 	docker compose up
 
-client: build_client install_client
+client: build_client 
 	docker-compose run --rm client yarn start
 
 server: db install_server 
@@ -12,7 +12,7 @@ server: db install_server
 db:
 	docker-compose run -p 5432:5432 -d --rm postgres 
 
-build_client: 
+build_client: install_client
 	docker-compose run --rm client build
 
 install_client: 
