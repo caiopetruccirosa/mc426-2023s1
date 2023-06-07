@@ -10,14 +10,15 @@ function MC102() {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
 
-
-    if (!userInfo.email) {
+    console.log(userInfo)
+    if (!userInfo.username) {
         return 'Você precisa fazer login para acessar essa página mc102!';
     }
 
     //FUNÇAÕ MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
     const texto = userInfo.text
+
     return (
         <>
             <Box sx={{ display: "flex", flexDirection: "column", textAlign: "left", bgcolor: "#cfe2e8", marginX: 2 }}>

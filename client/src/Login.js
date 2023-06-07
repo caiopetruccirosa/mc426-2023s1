@@ -33,7 +33,7 @@ function Login() {
   //   }
   // }
 
-function loginUser(e) {
+  function loginUser(e) {
     e.preventDefault();
     if (username !== "") {
       const data = { username, password };
@@ -42,18 +42,17 @@ function loginUser(e) {
           withCredentials: false,
         })
         .then((response) => {
-          user.setUsername(response.data.username);
-          user.setId(response.data.id);
+          console.log(response)
+          user.setUsername(response.data.user.username);
           setUsername("");
-          setId("");
           setPassword("");
           setLoginError(false);
           setRedirect(true);
         })
-        .catch((error) => { 
-                    console.log(error)
-                    window.alert(`Erro: ${error.response.data.message}`) 
-                });
+        .catch((error) => {
+          console.log(error)
+          window.alert(`Erro: ${error.response.data.message}`)
+        });
     } else {
       setLoginError(true);
     }

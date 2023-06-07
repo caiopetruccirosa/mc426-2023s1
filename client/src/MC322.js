@@ -9,7 +9,7 @@ function MC322() {
     const [text, setText] = useState('');
 
 
-    if (!userInfo.email) {
+    if (!userInfo.username) {
         return 'Você precisa fazer login para acessar essa página MC322!';
     }
 
