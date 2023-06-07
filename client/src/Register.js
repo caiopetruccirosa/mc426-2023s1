@@ -4,7 +4,6 @@ import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
 import { Box, Button, Grid, TextField } from "@mui/material";
 
-
 function Register() {
 
     const [email, setEmail] = useState('');
@@ -36,14 +35,16 @@ function Register() {
     // }
 
 function registerUser(e) {
+    console.log("Entrou aqui")
     e.preventDefault();
     if (email !== "") {
       const data = { email, username, nickname, password };
       axios
-        .post(`http://localhost:3000/auth/signup`, data, {
+        .post('/api/auth/signup', data, {
           withCredentials: false,
         })
         .then((response) => {
+          console.log(response)
           user.setEmail(response.data.email);
           user.setNickname(response.data.nickname);
           user.setUsername(response.data.username);
@@ -64,26 +65,6 @@ function registerUser(e) {
     if (redirect) {
         return <Navigate to={"/home"} />;
     }
-
-    // function registerUser(e) {
-    //     e.preventDefault();
-
-    //     const data = { email, password };
-    //     axios.post('', data, { withCredentials: true })
-    //         .then(response => {
-    //             user.setEmail(response.data.email);
-    //             user.setId(response.data.id);
-    //             setEmail('');
-    //             setId('');
-    //             setPassword('');
-    //             setRedirect(true)
-    //         })
-
-    // }
-
-    // if (redirect) {
-    //     return <Navigate to={'/home'} />
-    // }
 
     return (
         <Grid container sx={{ justifyContent: "center", }}>
@@ -107,7 +88,7 @@ function registerUser(e) {
                 type="username"
                 placeholder="Username"
                 value={username}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <br />
               <TextField
@@ -116,7 +97,7 @@ function registerUser(e) {
                 type="nickname"
                 placeholder="Nickname"
                 value={nickname}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setNickname(e.target.value)}
               />
               <br />
               <TextField
