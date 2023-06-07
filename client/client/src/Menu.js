@@ -1,12 +1,16 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
+import AssignmentInd from '@mui/icons-material/AssignmentInd';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
+import Forum from '@mui/icons-material/Forum';
 import IconButton from '@mui/material/IconButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Key from '@mui/icons-material/Key';
+import LibraryBooks from '@mui/icons-material/LibraryBooks';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -35,13 +39,16 @@ const drawerWidth = 240;
 const appBarHeight = "60px";
 
 function ResponsiveDrawer(props) {
+  const homes = [
+    { title: "Wiki", route: "/home" },
+    { title: "Fórum", route: "/forumhome" },
+  ]
   const items = [
     { title: "MC102", route: "/MC102" },
     { title: "MC202", route: "/MC202" },
     { title: "MC322", route: "/MC322" },
   ]
   const loginItems = [
-    { title: "Home", route: "/home" },
     { title: "Login", route: "/login" },
     { title: "Cadastro", route: "/register" },
   ]
@@ -89,12 +96,26 @@ function ResponsiveDrawer(props) {
       <Divider />
 
       <List>
+        {homes.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <LibraryBooks /> : <Forum />}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link >
+        ))}
+      </List>
+      <List>
         {loginItems.map((item, index) => (
           <Link index={index} className='link-custom' to={item.route}>
             <ListItem key={index}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <Key /> : <AssignmentInd />}
                 </ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
