@@ -16,36 +16,36 @@ Gustavo Eugenio John, 248318
 
 # Diagrama arquitetural (C4 - Nível 3)
 
-### Abaixo um diagrama em nível de componentes (C4 - Nível 3) para a arquitetura da aplicação.
+Abaixo um diagrama em nível de componentes (C4 - Nível 3) para a arquitetura da aplicação.
 
 ![ texto](images/C4-A1-v1.drawio.png)
 
 # Descrição dos componentes
 
 ## Interface Wiki
-### É a parte da View em que são exibidas as funcionalidades da wiki da aplicação Wiki+Forum, dentre elas a listagem, busca e exibição de artigos, posts e threads do fórum relacionados a um artigo, etc. A partir dela, é possível mudar para a interface Fórum;
+É a parte da View em que são exibidas as funcionalidades da wiki da aplicação Wiki+Forum, dentre elas a listagem, busca e exibição de artigos, posts e threads do fórum relacionados a um artigo, etc. A partir dela, é possível mudar para a interface Fórum;
 
 ## Interface Fórum
-### É a parte da View em que são exibidas as funcionalidades do fórum, dentre elas a exibição de posts, listagem de threads do fórum, interações com posts, artigos relacionados ao post ou à thread, etc. A partir dela, é possível mudar para a interface da Wiki;
+É a parte da View em que são exibidas as funcionalidades do fórum, dentre elas a exibição de posts, listagem de threads do fórum, interações com posts, artigos relacionados ao post ou à thread, etc. A partir dela, é possível mudar para a interface da Wiki;
 
 ## Rotas
-### É o componente da aplicação que recebe as ações executadas nas interfaces – por exemplo, as ações de autenticação ou criação de um post – e faz os redirecionamentos necessários para os demais componentes para que as ações sejam executadas;
+É o componente da aplicação que recebe as ações executadas nas interfaces – por exemplo, as ações de autenticação ou criação de um post – e faz os redirecionamentos necessários para os demais componentes para que as ações sejam executadas;
 
 ## Serviços
-### Executa os passos mais lógicos de cada ação requerida no componente Rotas – por exemplo, a validação do campo password antes de adicioná-lo ao banco de dados e a confirmação de que um user existe antes de criar um post;
+Executa os passos mais lógicos de cada ação requerida no componente Rotas – por exemplo, a validação do campo password antes de adicioná-lo ao banco de dados e a confirmação de que um user existe antes de criar um post;
 
 ## Modelos
-### É onde os objetos utilizados na aplicação têm seus atributos e tipos definidos – a nível de servidor –, estando em conformidade com o que já foi tipado e é esperado no banco de dados.
+É onde os objetos utilizados na aplicação têm seus atributos e tipos definidos – a nível de servidor –, estando em conformidade com o que já foi tipado e é esperado no banco de dados.
 
 ## Repositórios
-### Utilizando tanto o que é definido nos Modelos quanto as ações recebidas pelos Serviços, realiza as interações diretamente com o banco de dados.
+Utilizando tanto o que é definido nos Modelos quanto as ações recebidas pelos Serviços, realiza as interações diretamente com o banco de dados.
 
 ## Banco de dados
-### Armazena todos os dados da aplicação, como posts, respostas de um post, artigos, conteúdos dos artigos, perfis de usuários etc.
+Armazena todos os dados da aplicação, como posts, respostas de um post, artigos, conteúdos dos artigos, perfis de usuários etc.
 
 # Estilo arquitetural
 
-### Para a nossa aplicação, adotamos principalmente o estilo MVC. O estilo MVC (Model-View-Controller) é baseado em uma divisão do sistema que estabelece uma View – que representa a interface exposta ao usuário –, um Model – que define a estrutura dos dados e cuida da lógica da aplicação – e um Controller, responsável por receber os inputs da View e direcioná-los ao Model, podendo também em alguns casos atualizar diretamente o que é exibido na View.
+Para a nossa aplicação, adotamos principalmente o estilo MVC. O estilo MVC (Model-View-Controller) é baseado em uma divisão do sistema que estabelece uma View – que representa a interface exposta ao usuário –, um Model – que define a estrutura dos dados e cuida da lógica da aplicação – e um Controller, responsável por receber os inputs da View e direcioná-los ao Model, podendo também em alguns casos atualizar diretamente o que é exibido na View.
 
-### Dito isso, entendemos que o MVC seria o mais razoável para nossa aplicação pois orienta a organização de nossos componentes de maneira que faz sentido: as interfaces tanto da Wiki quanto do Fórum atuam como a View, o Controller é representado pelo componente Rotas do back-end, enquanto os outros componentes do back-end juntos à atuação do banco de dados constituem o Model, visto que são diretamente responsáveis pela execução das ações e modificações dos dados na aplicação.
+Dito isso, entendemos que o MVC seria o mais razoável para nossa aplicação pois orienta a organização de nossos componentes de maneira que faz sentido: as interfaces tanto da Wiki quanto do Fórum atuam como a View, o Controller é representado pelo componente Rotas do back-end, enquanto os outros componentes do back-end juntos à atuação do banco de dados constituem o Model, visto que são diretamente responsáveis pela execução das ações e modificações dos dados na aplicação.
 
