@@ -29,6 +29,7 @@ import MC202 from './MC202';
 import MC322 from './MC322';
 import Info from './Info';
 import axios from 'axios';
+import ForumHome from './ForumHome';
 import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
@@ -41,7 +42,7 @@ const appBarHeight = "60px";
 function ResponsiveDrawer(props) {
   const homes = [
     { title: "Wiki", route: "/home" },
-    { title: "Fórum", route: "/forumhome" },
+    { title: "Fórum", route: "/forum" },
   ]
   const items = [
     { title: "MC102", route: "/MC102" },
@@ -209,6 +210,7 @@ function ResponsiveDrawer(props) {
           <Routes>
             <Route path="/" element={<Info />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/forum" element={<ForumHome />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/MC102" element={<MC102 />} />
