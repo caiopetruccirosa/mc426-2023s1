@@ -10,6 +10,18 @@ function ForumHome() {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
 
+    let posts = [
+        {
+            author: 'autor1',
+            title: 'titulo1',
+            content: 'teste',
+        },
+        {
+            author: 'autor2',
+            title: 'titulo2',
+            content: 'teste'
+        }
+    ];
 
     //FUNÇAÕ MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
@@ -45,21 +57,13 @@ function ForumHome() {
     return (
         <>
         <div className="App">
-        <Post
-            title="Título do post 1"
-            content="Texto do post: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci."
-            author="@autorPost1"
-        />
-        <Post
-            title="Título do post 2"
-            content="Texto do post: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci."
-            author="@autorPost2"
-        />
-        <Post
-            title="Título do post 3"
-            content="Texto do post: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci."
-            author="@autorPost3"
-        />
+        {posts.map((item, index) => (
+            <Post key={index}
+                  title = {item.title}
+                  author = {item.author}
+                  content = {item.content}
+            />
+      ))}
     </div>
       </>
     )
