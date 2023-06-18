@@ -12,8 +12,6 @@ const Answer = ({ author, content }) => {
                 bgcolor: "white",
                 width: 800,
                 maxHeight: 500,
-                //paddingY: 2,
-                //paddingX: 6,
                 borderRadius: 10,
                 boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
                 textAlign: 'left' 
