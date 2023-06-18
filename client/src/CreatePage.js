@@ -1,12 +1,7 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import UserContext from "./UserContext";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import MDEditor from "@uiw/react-md-editor";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-
-
-
 
 
 function CreatePost() {
@@ -29,21 +24,6 @@ function CreatePost() {
             window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.email)
         }
     }
-
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
-
-
-
-
-    //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
 
     function registerUser(e) {
         e.preventDefault();

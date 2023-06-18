@@ -21,9 +21,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import UserContext from './UserContext';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import Register from './Register';
-import LoginTeste from './Menu';
 import MC102 from './MC102';
 import MC202 from './MC202';
 import MC322 from './MC322';
@@ -32,8 +31,6 @@ import axios from 'axios';
 import ForumHome from './ForumHome';
 import Home from './Home';
 import Login from './Login';
-import { Button } from '@mui/material';
-import { Navigate } from "react-router-dom";
 import CreatePost from './CreatePage';
 
 

@@ -1,6 +1,5 @@
 body{
   background-color:#000000 ;
-  /* background: linear-gradient(90deg, rgba(0,56,168,1) 22%, rgba(155,79,150,1) 94%); */
 
 }
 nav{
@@ -12,7 +11,6 @@ nav a{
   
   display: inline-block;
   font-size: xx-large;
-  /* padding: 50px; */
   text-decoration: none;
   color:black;
   border-bottom: 2px solid #f0f0f000;
@@ -23,13 +21,10 @@ nav a:hover{
   border-bottom: 2px solid gray;
 }
 main{
-  /* width: 500px; */
   min-height: 100vh;
   height: auto;
-  /* margin:10px auto; */
   text-align: center;
   background-color: #cfe2e8;
-  /* padding: 15px; */
   border-radius: 5px;
 
 }
@@ -42,43 +37,10 @@ main{
   ;
 }
 
-/* ul{
-  padding-left:0;
-  max-height:220px;
-  overflow-y:scroll;
-}
-
-ul li{
-  display: block;
-} */
-
 input{
-  /* box-shadow:  10px 5px 5px rgba(155,79,150,1);
-  border-color: rgba(0,56,168,1); */
   font-size: large;
   text-align: center;
 
   border-radius: 5px;
   margin-bottom: 30px;
 }
-
-/* .button{
-  font-size: large;
-  margin-top: 20px;
-  border-radius: 5px;
-  background-color: white;
-}
-.button:hover{
-  transition: background-color .5s, color 1.3s;
-  background-color: rgba(0,56,168,1);
-  color: white;
-} */
-
-/* .todolist{
-  margin-left: 6px;
-  margin-right: 6px;
-  background-color: rgb(235, 205, 233);
-  border: 2px solid rgba(0,56,168,1);
-  box-shadow:  10px 5px 5px rgba(155,79,150,1);
-
-} */

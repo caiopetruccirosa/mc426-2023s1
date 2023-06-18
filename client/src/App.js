@@ -1,24 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
 
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Register from "./Register";
+import { BrowserRouter } from "react-router-dom";
 import UserContext from "./UserContext";
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import Login from "./Login";
-import Home from "./Home";
-import Info from "./Info";
+import { useState, useContext } from "react";
 import Menu from "./Menu";
-import MC102 from "./MC102";
-import MC202 from "./MC202";
-import MC322 from "./MC322";
 
 function App() {
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [text, setText] = useState("");
-  const userInfo = useContext(UserContext);
 
   // useEffect(() => {
   //   axios

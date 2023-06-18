@@ -1,14 +1,10 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import UserContext from "./UserContext";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Box } from "@mui/material";
 
 function MC102() {
 
     const userInfo = useContext(UserContext);
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
 
     console.log(userInfo)
     if (!userInfo.username) {

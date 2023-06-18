@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import UserContext from "./UserContext";
 import { Navigate } from "react-router-dom";
-import { Box, Button, ButtonBase, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField } from "@mui/material";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -13,25 +13,6 @@ function Login() {
 
   const user = useContext(UserContext);
 
-
-  //FUNÇÃO DE LOGIN MOCKADA ENQUANTO N TENHO O ENDPOINT
-
-  // function loginUser(e) {
-  //   e.preventDefault();
-  //   if (email !== "") {
-
-  //     user.setEmail(email);
-  //     user.setId(id);
-  //     setEmail("");
-  //     setId("");
-  //     setPassword("");
-  //     setRedirect(true);
-
-
-  //   } else {
-  //     window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
-  //   }
-  // }
 
   function loginUser(e) {
     e.preventDefault();

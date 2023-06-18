@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import UserContext from "./UserContext";
 
 function MC322() {
@@ -21,15 +20,6 @@ function MC322() {
             window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.email)
         }
     }
-
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
 
     return (
         <>
