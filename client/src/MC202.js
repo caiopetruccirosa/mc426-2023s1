@@ -21,15 +21,6 @@ function MC202() {
         }
     }
 
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
-
     return (
         <>
             <form onSubmit={e => addPostagem(e)}>

@@ -23,20 +23,6 @@ function Home() {
         }
     }
 
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
-
-
-
-
-    //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
 
     function registerUser(e) {
         e.preventDefault();

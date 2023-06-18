@@ -16,23 +16,6 @@ function Register() {
 
   const user = useContext(UserContext);
 
-  //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
-
-  // function registerUser(e) {
-  //     e.preventDefault();
-
-  //     if (email !== "") {
-
-  //         user.setEmail(email);
-  //         user.setId(id);
-  //         setEmail("");
-  //         setId("");
-  //         setPassword("");
-  //         setRedirect(true);
-
-  //     }
-  // }
 
   function registerUser(e) {
     e.preventDefault();
