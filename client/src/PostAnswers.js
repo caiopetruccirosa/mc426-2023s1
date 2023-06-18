@@ -1,15 +1,10 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Answer from './Answer';
 import Post from './Post';
 import UserContext from "./UserContext";
-import { Box, Button, Grid, TextField } from "@mui/material";
+
 
 function PostAnswers() {
-
-    const userInfo = useContext(UserContext);
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
 
     let posts = [
         {
