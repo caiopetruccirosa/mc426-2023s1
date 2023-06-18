@@ -1,12 +1,7 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import UserContext from "./UserContext";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import MDEditor from "@uiw/react-md-editor";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-
-
-
 
 
 function CreatePost() {
