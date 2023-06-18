@@ -2,15 +2,15 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import UserContext from "./UserContext";
 
-function MC322() {
+function MC202() {
 
     const userInfo = useContext(UserContext);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
 
 
-    if (!userInfo.email) {
-        return 'Você precisa fazer login para acessar essa página MC322!';
+    if (!userInfo.username) {
+        return 'Você precisa fazer login para acessar essa página! MC202';
     }
 
     //FUNÇAÕ MOCKADA ENQUANTO N TEMOS O ENDPOINT
@@ -34,7 +34,7 @@ function MC322() {
     return (
         <>
             <form onSubmit={e => addPostagem(e)}>
-                <h1>MC322</h1>
+                <h1>MC202</h1>
                 <input placeholder={'Título'} value={title} onChange={e => setTitle(e.target.value)} />
                 <input style={{ height: "150px", textAlign: "center", }} placeholder={'Conteúdo'} value={text} onChange={e => setText(e.target.value)} />
                 <button type="submit">Enviar</button>
@@ -44,4 +44,4 @@ function MC322() {
     )
 }
 
-export default MC322;
+export default MC202;

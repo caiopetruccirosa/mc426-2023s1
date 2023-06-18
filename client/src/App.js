@@ -15,29 +15,30 @@ import MC202 from "./MC202";
 import MC322 from "./MC322";
 
 function App() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [id, setId] = useState("");
+  const [text, setText] = useState("");
   const userInfo = useContext(UserContext);
 
-  useEffect(() => {
-    axios
-      .post(
-        "https://api-todo-list-six.vercel.app/user",
-        { id: userInfo.id },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        setEmail(response.data.email);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post(
+  //       "https://api-todo-list-six.vercel.app/user",
+  //       { id: userInfo.id },
+  //       { withCredentials: true }
+  //     )
+  //     .then((response) => {
+  //       setEmail(response.data.email);
+  //     });
+  // }, []);
 
   //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
 
-  function logout() {
+  // function logout() {
 
-    setEmail('')
-  }
+  //   setEmail('')
+  // }
 
   // function logout(){
   //   axios.post('https://api-todo-list-six.vercel.app/logout', {}, {withCredentials:true})
@@ -47,7 +48,7 @@ function App() {
   // }
 
   return (
-    <UserContext.Provider value={{ email, setEmail, id, setId }}>
+    <UserContext.Provider value={{ username, setUsername, id, setId, text, setText }}>
       <BrowserRouter>
         <Menu />
       </BrowserRouter>
