@@ -25,7 +25,6 @@ const validateUserFields = (user: User) => {
         throw new InvalidParameterError('nickname', user.nickname);
 
     // check if email is valid
-    // regex expression obtained from RFC882 (http://www.ex-parrot.com/~pdw/Mail-RFC822-Address.html)
     const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
     if (!EMAIL_REGEX.test(user.email))
         throw new InvalidParameterError('email', user.email);
