@@ -7,6 +7,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import Forum from '@mui/icons-material/Forum';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import IconButton from '@mui/material/IconButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import Key from '@mui/icons-material/Key';
@@ -18,6 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import UserContext from './UserContext';
@@ -30,11 +32,11 @@ import MC322 from './MC322';
 import Info from './Info';
 import axios from 'axios';
 import ForumHome from './ForumHome';
+import CreatePost from './CreatePost';
 import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
 import { Navigate } from "react-router-dom";
-import CreatePost from './CreatePage';
 
 
 const drawerWidth = 240;
@@ -53,7 +55,11 @@ function ResponsiveDrawer(props) {
   const loginItems = [
     { title: "Login", route: "/login" },
     { title: "Cadastro", route: "/register" },
+  ]
+
+  const creationItems = [
     { title: "Criar página", route: "/create-page" },
+    { title: "Criar post", route: "/create-post" },
   ]
 
   const { window } = props;
@@ -119,6 +125,21 @@ function ResponsiveDrawer(props) {
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <Key /> : <AssignmentInd />}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link >
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {creationItems.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <HistoryEduIcon /> : <RateReviewIcon />}
                 </ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
@@ -214,7 +235,7 @@ function ResponsiveDrawer(props) {
             <Route path="/home" element={<Home />} />
             <Route path="/forum" element={<ForumHome />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/create-page" element={<CreatePost />} />
+            <Route path="/create-post" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/MC102" element={<MC102 />} />
             <Route path="/MC202" element={<MC202 />} />
