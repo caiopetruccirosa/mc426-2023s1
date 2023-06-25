@@ -104,7 +104,7 @@ const CreatePost = () => {
                   }
                 }}
                 required
-                placeholder="Digite o contéudo do post"
+                placeholder="Digite o conteúdo do post"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />

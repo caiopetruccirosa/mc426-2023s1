@@ -1,7 +1,23 @@
-import React from 'react';
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { useState } from 'react';
+import { Box, Button, Grid } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const Answer = ({ author, content }) => {
+
+const Answer = ({ author, content, date }) => {
+  const [like, setLike] = useState(0)
+  const [likeClicked, setLikeClicked] = useState(false)
+  
+  const likePost = () => {
+    if (likeClicked) {
+      setLike(like - 1)
+      setLikeClicked(false)
+    } else {
+      setLike(like + 1)
+      setLikeClicked(true)
+    }
+
+  }
+ 
     return (
         <Grid container sx={{ justifyContent: "left" }}>
           <Grid sm={12} item sx={{ padding: 1, display: "flex", justifyContent: "center" }}>
@@ -21,14 +37,16 @@ const Answer = ({ author, content }) => {
             >
                 <Box
                   sx = {{
-                    bgcolor: "#white",
-                    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
+                    bgcolor: "#e7e7e7",
+                    borderRadius: 10,
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 10,
                     height: 60,
                     paddingY: 0.5,
                     paddingX: 4,
                   }}
                 >
-                  <p>{author} -- Postado às 23h32, 21 de janeiro de 2031</p>
+                  <p>{author} -- {date}</p>
                 </Box>
                 <Box
                   sx = {{
@@ -41,33 +59,27 @@ const Answer = ({ author, content }) => {
                 <Box
                   sx = {{
                     bgcolor: "white",
-                    height: 140,
-                    boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
+                    maxHeight: 160,
+                    borderRadius: 10,
                     paddingY: 2,
                     paddingX: 4,
                   }}>
-                  <TextField
-                    sx={{ 
-                      mb: 2,
-                      mr: 1,
-                      backgroundColor: "white" ,
-                      width: 350,
-                      '& input::placeholder': {
-                          textAlign: 'left',
-                        }
-                    }}
-                    variant="outlined"
-                    type="email"
-                    placeholder="Digite uma resposta para o comentário."
-                  />
-                  <Button variant="outlined" type="submit" sx={{ padding: 1, height: 55}} >Enviar resposta</Button>
                   <div
                     sx ={{
                       display: 'flex',
                       justifyContent: 'space-between'
                     }}
                   >
-                    <Button variant="contained" type="submit" sx={{ mr: 1}}>Ver respostas</Button>
+                    <Button 
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      sx={{ mr: 1 }}
+                      onClick={likePost}
+                    >
+                      <FavoriteIcon sx={{ color: likeClicked ? 'red' : 'white', mr: 1 }}/>
+                      ({like})
+                    </Button> 
                     <Button variant="contained" type="submit" sx={{ ml: 1, mr: 1}}>Compartilhar</Button>
                     <Button variant="contained" type="submit" sx={{ ml: 1}}>Denunciar</Button>
                   </div>
