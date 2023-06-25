@@ -137,10 +137,20 @@ const Post = ({ post }) => {
               }}
             >
               <Button 
+                variant="contained"
+                color="primary"
+                type="submit"
+                sx={{ mr: 1 }}
+                onClick={likePost}
+              >
+                <FavoriteIcon sx={{ color: likeClicked ? 'red' : 'white', mr: 1 }}/>
+                ({like})
+              </Button> 
+              <Button 
                 variant="contained" 
                 type="submit"
                 onClick={() => handleClick(post.id)}
-                sx={{ mr: 1 }}
+                sx={{ ml: 1, mr: 1 }}
               >Ver respostas ({post.answers.length})
               </Button>
               <Button variant="contained" type="submit" sx={{ ml: 1, mr: 1 }}>Compartilhar</Button>

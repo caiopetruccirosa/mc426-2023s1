@@ -1,7 +1,23 @@
-import React from 'react';
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { useState } from 'react';
+import { Box, Button, Grid } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 const Answer = ({ author, content, date }) => {
+  const [like, setLike] = useState(0)
+  const [likeClicked, setLikeClicked] = useState(false)
+  
+  const likePost = () => {
+    if (likeClicked) {
+      setLike(like - 1)
+      setLikeClicked(false)
+    } else {
+      setLike(like + 1)
+      setLikeClicked(true)
+    }
+
+  }
+ 
     return (
         <Grid container sx={{ justifyContent: "left" }}>
           <Grid sm={12} item sx={{ padding: 1, display: "flex", justifyContent: "center" }}>
@@ -54,6 +70,16 @@ const Answer = ({ author, content, date }) => {
                       justifyContent: 'space-between'
                     }}
                   >
+                    <Button 
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      sx={{ mr: 1 }}
+                      onClick={likePost}
+                    >
+                      <FavoriteIcon sx={{ color: likeClicked ? 'red' : 'white', mr: 1 }}/>
+                      ({like})
+                    </Button> 
                     <Button variant="contained" type="submit" sx={{ ml: 1, mr: 1}}>Compartilhar</Button>
                     <Button variant="contained" type="submit" sx={{ ml: 1}}>Denunciar</Button>
                   </div>
