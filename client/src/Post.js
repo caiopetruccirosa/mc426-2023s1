@@ -24,12 +24,15 @@ const Post = ({ post }) => {
 
   const navigate = useNavigate();
 
+  const handleRelatedArticle = () => {
+    navigate(`/${post.relatedArticle}`);
+  }
+
   const handleAnswer = (e) => {
 
     const answer = {
       author: userInfo.username,
       content: answerContent,
-      date: new Date()
     }
 
     const data = {
@@ -83,13 +86,21 @@ const Post = ({ post }) => {
             sx={{
               bgcolor: "#e7e7e7",
               boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
-              height: 110,
+              height: 170,
               paddingY: 0.5,
               paddingX: 4,
             }}
           >
             <h3>{post.title}</h3>
             <p>@{post.author} -- {post.date}</p>
+            <h4>Artigo relacionado: 
+                <Button 
+                    variant="contained" 
+                    type="submit"
+                    onClick={handleRelatedArticle}
+                    sx={{ ml: 1 }}
+                >{post.relatedArticle}
+                </Button></h4>
           </Box>
           <Box
             sx={{
