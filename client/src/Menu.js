@@ -190,7 +190,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            TITULO
+            MC426 - Aplicação Wiki + Fórum
           </Typography>
         </Toolbar>
       </AppBar>
