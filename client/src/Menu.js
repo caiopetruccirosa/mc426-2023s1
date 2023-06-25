@@ -33,6 +33,7 @@ import Info from './Info';
 import axios from 'axios';
 import ForumHome from './ForumHome';
 import CreatePost from './CreatePost';
+import PostAnswers from './PostAnswers';
 import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
@@ -235,6 +236,7 @@ function ResponsiveDrawer(props) {
             <Route path="/home" element={<Home />} />
             <Route path="/forum" element={<ForumHome />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forum/answers/:postId" element={<PostAnswers />}/>
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/MC102" element={<MC102 />} />

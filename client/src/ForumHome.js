@@ -6,62 +6,78 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 
 function ForumHome() {
 
-    const userInfo = useContext(UserContext);
-    const [title, setTitle] = useState('');
-    const [text, setText] = useState('');
-
+    // array de posts mockados, podem apagar quando o server/db estiverem 100%
     let posts = [
         {
-            author: 'autor1',
-            title: 'titulo1',
-            content: 'teste',
+            id: 1,
+            author: 'edmotaDaFeec',
+            date: 'Postado às 23h32, 21 de janeiro de 2031',
+            title: 'gente, alguém recomenda um canal do youtube pra mc202??',
+            content: 'ate tento ler as coisa que o prof posta no site, mas eu sinto que aprendo bem melhor com videos T_t',
+            answers: [
+                {
+                    author: 'computeirahExaustah',
+                    content: 'Eu já sofri muito com essa disciplina. Sinto que quando passei, foi na sorte.',
+                    date: 'Postado às 23h32, 21 de janeiro de 2031',
+                },
+                {
+                    author: 'guaranaJesus',
+                    content: 'capaz q se revirar o stackoverflow n encontra nada sobre isso kkkk',
+                    date: 'Postado às 23h32, 21 de janeiro de 2031',
+                },
+                {
+                    author: 'joaquinus',
+                    content: 'sinceramente n sei pq vcs se estressam tanto com isso'
+                }
+            ]
         },
         {
-            author: 'autor2',
-            title: 'titulo2',
-            content: 'teste'
+            id: 2,
+            author: 'latinoSurtadao',
+            date: 'Postado às 23h32, 21 de janeiro de 2031',
+            title: 'Surto em lorem ipsum',
+            content: 'Lorem!!!!!! ipsum!!!!!!! dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis a condimentum vitae sapien pellentesque habitant. Vivamus arcu felis bibendum ut tristique et egestas quis ipsum. Facilisi morbi tempus iaculis urna id. Dui sapien eget mi proin. Nibh ipsum consequat nisl vel pretium lectus quam id!!!',
+            answers: []
+        },
+        {
+            id: 3,
+            author: 'namoral',
+            date: 'Postado às 23h32, 21 de janeiro de 2031',
+            title: 'gente na moral......',
+            content: 'o que esta acontecendo',
+            answers: [
+                {
+                    author: 'evelynBeCareful',
+                    content: 'tbm n sei mo'
+                },
+                {
+                    author: 'leitecon_densado',
+                    content: 'bora agitar ifch ultimo dia do semestre pfvr'
+                }
+            ]
         }
     ];
+    // fim do posts mockados
 
-    //FUNÇAÕ MOCKADA ENQUANTO N TEMOS O ENDPOINT
+      // ESPECIFICAR ENDPOINT DA REQUEST DE FETCH POSTS
+      /*
+      try 
+      {
+        posts = axios.GET('api/endpointDeGetPosts')
+      }
 
-    function addPostagem(e) {
-        e.preventDefault();
-        if (title && text && userInfo.email) {
-            window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.email)
-        }
-    }
-
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
-
-
-
-
-    //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
-
-    function registerUser(e) {
-        e.preventDefault();
-
-
-    }
-
+      catch(error)
+      {
+        console.error(error)
+      }
+      */
 
     return (
         <>
         <div className="App">
-        {posts.map((item, index) => (
+        {posts.map((post, index) => (
             <Post key={index}
-                  title = {item.title}
-                  author = {item.author}
-                  content = {item.content}
+                  post={post}
             />
       ))}
     </div>

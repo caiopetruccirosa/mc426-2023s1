@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Button, Grid, TextField } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
+import UserContext from "./UserContext";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const Post = ({ title, author, content }) => {
+const Post = ({ post }) => {
+  const [answerContent, setAnswerContent] = useState('')
   const [like, setLike] = useState(0)
   const [likeClicked, setLikeClicked] = useState(false)
+
+  const userInfo = useContext(UserContext) ?? {username: 'mockUser'};
 
   const likePost = () => {
     if (likeClicked) {
@@ -15,6 +20,45 @@ const Post = ({ title, author, content }) => {
       setLikeClicked(true)
     }
 
+  }
+
+  const navigate = useNavigate();
+
+  const handleAnswer = (e) => {
+
+    const answer = {
+      author: userInfo.username,
+      content: answerContent,
+      date: new Date()
+    }
+
+    const data = {
+      id: post.id,
+      answer: answer
+    }
+
+      // ESPECIFICAR ENDPOINT DA REQUEST DE CRIAR ANSWER (DE UM POST)
+      /*
+      try 
+      {
+        axios.post('api/endpointDeCriarResposta', data)
+      }
+
+      catch(error)
+      {
+        console.error(error)
+      }
+      */
+
+    window.alert("Sua resposta foi adicionada! Obrigado.");
+
+    // limpar campo de resposta apos pop up
+    setAnswerContent('');
+  }
+
+  const handleClick = (postId) => {
+
+    navigate(`/forum/answers/${postId}`, { state: {post} });
   }
 
 
@@ -44,15 +88,15 @@ const Post = ({ title, author, content }) => {
               paddingX: 4,
             }}
           >
-            <h3>{title}</h3>
-            <p>{author} -- Postado às 23h32, 21 de janeiro de 2031</p>
+            <h3>{post.title}</h3>
+            <p>@{post.author} -- {post.date}</p>
           </Box>
           <Box
             sx={{
               paddingY: 1,
               paddingX: 4,
             }}>
-            <p>{content}</p>
+            <p>{post.content}</p>
           </Box>
           <div style={{ flex: 1 }}></div>
 
@@ -70,22 +114,35 @@ const Post = ({ title, author, content }) => {
                 mr: 1,
                 backgroundColor: "white",
                 width: 350,
-                '& input::placeholder': {
+                '& input': {
                   textAlign: 'left',
                 }
               }}
               variant="outlined"
-              type="email"
+              value={answerContent}
+              onChange={(e) => setAnswerContent(e.target.value)}
+              type="text"
               placeholder="Digite uma resposta para o post"
             />
-            <Button variant="outlined" type="submit" sx={{ padding: 1, height: 55 }} >Enviar resposta</Button>
+            <Button 
+              variant="outlined" 
+              type="submit"
+              onClick={handleAnswer}
+              sx={{ padding: 1, height: 55 }} 
+            > Enviar resposta</Button>
             <div
               sx={{
                 display: 'flex',
                 justifyContent: 'space-between'
               }}
             >
-              <Button variant="contained" type="submit" sx={{ mr: 1 }}>Ver respostas</Button>
+              <Button 
+                variant="contained" 
+                type="submit"
+                onClick={() => handleClick(post.id)}
+                sx={{ mr: 1 }}
+              >Ver respostas ({post.answers.length})
+              </Button>
               <Button variant="contained" type="submit" sx={{ ml: 1, mr: 1 }}>Compartilhar</Button>
               <Button variant="contained" type="submit" sx={{ ml: 1 }}>Denunciar</Button>
             </div>
