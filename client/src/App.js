@@ -10,9 +10,7 @@ import Login from "./Login";
 import Home from "./Wiki";
 import Info from "./Info";
 import Menu from "./Menu";
-import MC102 from "./MC102";
-import MC202 from "./MC202";
-import MC322 from "./MC322";
+
 
 function App() {
 

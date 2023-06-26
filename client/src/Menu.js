@@ -26,9 +26,7 @@ import UserContext from './UserContext';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Register from './Register';
 import LoginTeste from './Menu';
-import MC102 from './MC102';
-import MC202 from './MC202';
-import MC322 from './MC322';
+
 import Info from './Info';
 import axios from 'axios';
 import ForumHome from './ForumHome';
@@ -50,11 +48,6 @@ function ResponsiveDrawer(props) {
   const homes = [
     { title: "Wiki", route: "/wiki" },
     { title: "Fórum", route: "/forum" },
-  ]
-  const items = [
-    { title: "MC102", route: "/MC102" },
-    { title: "MC202", route: "/MC202" },
-    { title: "MC322", route: "/MC322" },
   ]
   const loginItems = [
     { title: "Login", route: "/login" },
@@ -152,21 +145,6 @@ function ResponsiveDrawer(props) {
         ))}
       </List>
       <Divider />
-      <List>
-        {items.map((item, index) => (
-          <Link index={index} className='link-custom' to={item.route}>
-            <ListItem key={index}>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={item.title} />
-              </ListItemButton>
-            </ListItem>
-          </Link >
-        ))}
-      </List>
-      <Divider />
     </div>
   );
 
@@ -244,8 +222,6 @@ function ResponsiveDrawer(props) {
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/article" element={<Article />} />
-            <Route path="/MC202" element={<MC202 />} />
-            <Route path="/MC322" element={<MC322 />} />
           </Routes>
         </main>
 
