@@ -4,16 +4,18 @@ import UserContext from "./UserContext";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import MDEditor from "@uiw/react-md-editor";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import { Navigate } from "react-router-dom";
 
 
 
 
 
-function CreatePost() {
+function CreatePage() {
 
     const userInfo = useContext(UserContext);
     const [title, setTitle] = useState('');
-    const [text, setText] = useState("");
+    const [description, setDescription] = useState("");
+    const [redirect, setRedirect] = useState("");
 
 
 
@@ -25,8 +27,8 @@ function CreatePost() {
 
     function addPostagem(e) {
         e.preventDefault();
-        if (title && text && userInfo.email) {
-            window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.email)
+        if (title && description && userInfo.username) {
+            window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.username)
         }
     }
 
@@ -48,11 +50,16 @@ function CreatePost() {
     function registerUser(e) {
         e.preventDefault();
         console.log(e)
-        userInfo.setText(text)
-
+        // const teste = userInfo.allArticles
+        // teste.push({ title: title, description: description })
+        // console.log(teste)
+        userInfo.setAllArticles([...userInfo.allArticles, { title, description }]);
+        setRedirect(true)
 
     }
-
+    if (redirect) {
+        return <Navigate to={"/wiki"} />;
+    }
 
     return (
         <>
@@ -60,18 +67,18 @@ function CreatePost() {
                 <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
                     <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
                         <form action="" onSubmit={e => registerUser(e)}>
-                            <h1>Criar Postagem!</h1>
+                            <h1>Criar Artigo!</h1>
                             <p>Escreva abaixo o contúdo da página WIKI que vc quer criar, aceitamos texto no formato Markdown ou (Html, porém não funciona ainda pois n temos um interpretador pra isso)</p>
                             <TextField
                                 sx={{ mb: 2, backgroundColor: "white" }}
                                 variant="outlined"
                                 type="text"
-                                placeholder="title"
+                                placeholder="Título"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                             <br />
-                            <MDEditor height={400} value={text} onChange={setText} />
+                            <MDEditor height={400} value={description} onChange={setDescription} />
                             <br />
                             <Button sx={{ mt: 2 }} variant="contained" type="submit" >Enviar</Button>
                         </form>
@@ -84,4 +91,4 @@ function CreatePost() {
     )
 }
 
-export default CreatePost;
+export default CreatePage;

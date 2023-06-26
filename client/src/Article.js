@@ -4,7 +4,7 @@ import UserContext from "./UserContext";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Box } from "@mui/material";
 
-function MC102() {
+function Article() {
 
     const userInfo = useContext(UserContext);
     const [title, setTitle] = useState('');
@@ -29,4 +29,4 @@ function MC102() {
     )
 }
 
-export default MC102;
+export default Article;

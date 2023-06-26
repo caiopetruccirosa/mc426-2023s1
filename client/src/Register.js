@@ -43,9 +43,8 @@ function Register() {
           withCredentials: false,
         })
         .then((response) => {
-          console.log(response)
-          user.setUsername(username);
-          user.setId(id);
+          user.setUsername(response.data.user.username);
+          user.setId(response.data.user.id);
           setEmail("");
           setNickname("");
           setUsername("");

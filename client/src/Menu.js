@@ -34,10 +34,13 @@ import axios from 'axios';
 import ForumHome from './ForumHome';
 import CreatePost from './CreatePost';
 import PostAnswers from './PostAnswers';
-import Home from './Home';
+import Home from './Wiki';
 import Login from './Login';
 import { Button } from '@mui/material';
 import { Navigate } from "react-router-dom";
+import Wiki from './Wiki';
+import Article from './Article';
+import CreatePage from './CreatePage';
 
 
 const drawerWidth = 240;
@@ -45,7 +48,7 @@ const appBarHeight = "60px";
 
 function ResponsiveDrawer(props) {
   const homes = [
-    { title: "Wiki", route: "/home" },
+    { title: "Wiki", route: "/wiki" },
     { title: "Fórum", route: "/forum" },
   ]
   const items = [
@@ -59,7 +62,7 @@ function ResponsiveDrawer(props) {
   ]
 
   const creationItems = [
-    { title: "Criar página", route: "/create-page" },
+    { title: "Criar artigo", route: "/create-article" },
     { title: "Criar post", route: "/create-post" },
   ]
 
@@ -233,13 +236,14 @@ function ResponsiveDrawer(props) {
         <main>
           <Routes>
             <Route path="/" element={<Info />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/wiki" element={<Wiki />} />
             <Route path="/forum" element={<ForumHome />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/forum/answers/:postId" element={<PostAnswers />}/>
+            <Route path="/forum/answers/:postId" element={<PostAnswers />} />
+            <Route path="/create-article" element={<CreatePage />} />
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/MC102" element={<MC102 />} />
+            <Route path="/article" element={<Article />} />
             <Route path="/MC202" element={<MC202 />} />
             <Route path="/MC322" element={<MC322 />} />
           </Routes>
