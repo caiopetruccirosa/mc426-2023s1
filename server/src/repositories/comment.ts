@@ -1,16 +1,18 @@
 import Comment from '../models/comment';
 import errors from '../errors';
-import db from './db';
+import { DatabaseClientPool } from './dbclient'
 
 const COMMENT_TABLE = 'comment';
 
 export const createComment = async (comment: Comment): Promise<Comment> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `INSERT INTO ${COMMENT_TABLE} (post_id, author_username, text) VALUES ($1, $2, $3) RETURNING id, post_id, author_username, timestamp, text;`,
         [comment.postId, comment.authorUsername, comment.text]
     );
-    await db.release(client);
+    await pool.release(client);
+    
     const rows = [...result];
     if (rows.length === 0) {
         throw new errors.DatabaseError();
@@ -27,12 +29,14 @@ export const createComment = async (comment: Comment): Promise<Comment> => {
 };
 
 export const getCommentsByPostId = async (post_id: string): Promise<Comment[]> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, post_id, author_username, timestamp, text FROM ${COMMENT_TABLE} WHERE post_id = $1;`,
         [post_id]
     );
-    await db.release(client);
+    await pool.release(client);
+    
     const rows = [...result];
     const comments: Comment[] = [];
 
@@ -51,11 +55,12 @@ export const getCommentsByPostId = async (post_id: string): Promise<Comment[]> =
 };
 
 export const getAllComments = async (): Promise<Comment[]> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, post_id, author_username, timestamp, text FROM ${COMMENT_TABLE};`
     );
-    await db.release(client);
+    await pool.release(client);
     const rows = [...result];
     const comments: Comment[] = [];
 

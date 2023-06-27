@@ -1,17 +1,17 @@
 import Post from '../models/post';
 import errors from '../errors';
-import db from './db'
+import { DatabaseClientPool } from './dbclient'
 
 const POST_TABLE = 'post';
 
 export const createPost = async (post: Post): Promise<Post> => {
-
-    const client = await db.acquire()
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire()
     const result = await client.query(
         `INSERT INTO ${POST_TABLE} (poster_username, related_article_id, title, content) VALUES ($1, $2, $3, $4) RETURNING id, related_article_id, timestamp;`,
         [post.posterUsername, post.relatedArticleId, post.title, post.content]
     )
-    await db.release(client)
+    await pool.release(client)
     const rows = [...result]
     if (rows.length == 0)
         throw new errors.DatabaseError();
@@ -25,12 +25,13 @@ export const createPost = async (post: Post): Promise<Post> => {
 }
 
 export const getPostById = async (id: string): Promise<Post> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, poster_username, timestamp, related_article_id, title, content FROM ${POST_TABLE} WHERE id = $1;`,
         [id]
     );
-    await db.release(client)
+    await pool.release(client)
     const rows = [...result]
     if (rows.length == 0)
         throw new errors.ResourceNotFound('Post');
@@ -47,16 +48,16 @@ export const getPostById = async (id: string): Promise<Post> => {
 }
 
 export const getAllPosts = async (): Promise<Post[]> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, poster_username, timestamp, related_article_id, title, content FROM ${POST_TABLE};`
     );
-    
-    await db.release(client);
-    const rows = [...result];
-    const posts: Post[] = [];
-    await db.release(client)
+    await pool.release(client);
 
+    const rows = [...result];
+
+    const posts: Post[] = [];
     if (rows.length == 0)
         throw new errors.DatabaseError();
 

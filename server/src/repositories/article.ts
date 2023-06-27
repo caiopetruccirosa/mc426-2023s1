@@ -1,16 +1,18 @@
 import Article from '../models/article';
 import errors from '../errors';
-import db from './db';
+import { DatabaseClientPool } from './dbclient'
 
 const ARTICLE_TABLE = 'article';
 
 export const createArticle = async (article: Article): Promise<Article> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `INSERT INTO ${ARTICLE_TABLE} (creator_username, title, content) VALUES ($1, $2, $3) RETURNING id, timestamp;`,
         [article.creatorUsername, article.title, article.content]
     );
-    await db.release(client);
+    await pool.release(client);
+    
     const rows = [...result];
     if (rows.length === 0)
         throw new errors.DatabaseError();
@@ -23,12 +25,14 @@ export const createArticle = async (article: Article): Promise<Article> => {
 };
 
 export const getArticleById = async (id: string): Promise<Article> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, creator_username, timestamp, title, content FROM ${ARTICLE_TABLE} WHERE id = $1;`,
         [id]
     );
-    await db.release(client);
+    await pool.release(client);
+    
     const rows = [...result];
     if (rows.length === 0)
         throw new errors.ResourceNotFound('Article');
@@ -44,11 +48,12 @@ export const getArticleById = async (id: string): Promise<Article> => {
 };
 
 export const getAllArticles = async (): Promise<Article[]> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, creator_username, timestamp, title, content FROM ${ARTICLE_TABLE};`
     );
-    await db.release(client);
+    await pool.release(client);
     const rows = [...result];
     const articles: Article[] = [];
 
