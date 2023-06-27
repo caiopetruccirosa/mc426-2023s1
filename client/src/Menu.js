@@ -1,12 +1,17 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
+import AssignmentInd from '@mui/icons-material/AssignmentInd';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
+import Forum from '@mui/icons-material/Forum';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import IconButton from '@mui/material/IconButton';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Key from '@mui/icons-material/Key';
+import LibraryBooks from '@mui/icons-material/LibraryBooks';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -14,6 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import RateReviewIcon from '@mui/icons-material/RateReview';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import UserContext from './UserContext';
@@ -25,6 +31,9 @@ import MC202 from './MC202';
 import MC322 from './MC322';
 import Info from './Info';
 import axios from 'axios';
+import ForumHome from './ForumHome';
+import CreatePost from './CreatePost';
+import PostAnswers from './PostAnswers';
 import Home from './Home';
 import Login from './Login';
 import { Button } from '@mui/material';
@@ -35,15 +44,23 @@ const drawerWidth = 240;
 const appBarHeight = "60px";
 
 function ResponsiveDrawer(props) {
+  const homes = [
+    { title: "Wiki", route: "/home" },
+    { title: "Fórum", route: "/forum" },
+  ]
   const items = [
     { title: "MC102", route: "/MC102" },
     { title: "MC202", route: "/MC202" },
     { title: "MC322", route: "/MC322" },
   ]
   const loginItems = [
-    { title: "Home", route: "/home" },
     { title: "Login", route: "/login" },
     { title: "Cadastro", route: "/register" },
+  ]
+
+  const creationItems = [
+    { title: "Criar página", route: "/create-page" },
+    { title: "Criar post", route: "/create-post" },
   ]
 
   const { window } = props;
@@ -89,12 +106,41 @@ function ResponsiveDrawer(props) {
       <Divider />
 
       <List>
+        {homes.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <LibraryBooks /> : <Forum />}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link >
+        ))}
+      </List>
+      <List>
         {loginItems.map((item, index) => (
           <Link index={index} className='link-custom' to={item.route}>
             <ListItem key={index}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {index % 2 === 0 ? <Key /> : <AssignmentInd />}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            </ListItem>
+          </Link >
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {creationItems.map((item, index) => (
+          <Link index={index} className='link-custom' to={item.route}>
+            <ListItem key={index}>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <HistoryEduIcon /> : <RateReviewIcon />}
                 </ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
@@ -144,7 +190,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            TITULO
+            MC426 - Aplicação Wiki + Fórum
           </Typography>
         </Toolbar>
       </AppBar>
@@ -182,13 +228,16 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
+        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
       >
         <main>
           <Routes>
             <Route path="/" element={<Info />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/forum" element={<ForumHome />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forum/answers/:postId" element={<PostAnswers />}/>
+            <Route path="/create-post" element={<CreatePost />} />
             <Route path="/login" element={<Login />} />
             <Route path="/MC102" element={<MC102 />} />
             <Route path="/MC202" element={<MC202 />} />
