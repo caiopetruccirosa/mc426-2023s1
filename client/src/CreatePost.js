@@ -1,34 +1,32 @@
 import axios from "axios";
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Grid, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import UserContext from "./UserContext";
 
 const CreatePost = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [relatedArticle, setRelatedArticle] = useState('')
-  const [allArticles, setAllArticles] = useState([])
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [relatedArticle, setRelatedArticle] = useState('');
+  const [allArticles, setAllArticles] = useState([]);
 
   const navigate = useNavigate();
-
   const userInfo = useContext(UserContext);
-  if (!userInfo.username) {
-    return 'Você precisa fazer login para acessar essa página!';
-  }
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('api/articles');
-      setAllArticles(response.data);
-    } catch (error) {
-      console.error(error);
-      setAllArticles(userInfo.allArticles);
-    }
-  };
-  fetchData();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('api/articles');
+        setAllArticles(response.data);
+      } catch (error) {
+        console.error(error);
+        setAllArticles(userInfo.allArticles);
+      }
+    };
 
-  // funcao chamada ao clicar no botao "criar post"
+    fetchData();
+  }, [userInfo.allArticles]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -39,19 +37,19 @@ const CreatePost = () => {
       title: title,
     };
 
-    try 
-    {
-      axios.post('api/posts', post)
-    }
-
-    catch(error)
-    {
-      console.error(error)
+    try {
+      axios.post('api/posts', post);
+    } catch (error) {
+      console.error(error);
     }
 
     window.alert("Seu post foi adicionado ao fórum! Obrigado.");
 
     navigate('/forum');
+  };
+
+  if (!userInfo.username) {
+    return 'Você precisa fazer login para acessar essa página!';
   }
 
   return (
@@ -140,13 +138,9 @@ const CreatePost = () => {
             value={relatedArticle}
             onChange={(e) => setRelatedArticle(e.target.value)}
           >
-            {allArticles.map((item) => {
-              return (
-                <MenuItem value={item.relatedArticleId}>{item.title}</MenuItem>
-
-              )
-            })}
-
+            {allArticles.map((item) => (
+              <MenuItem key={item.relatedArticleId} value={item.relatedArticleId}>{item.title}</MenuItem>
+            ))}
           </Select>
           <div style={{ flex: 1 }}></div>
           <div
