@@ -1,16 +1,17 @@
 import Post from '../models/post';
 import errors from '../errors';
-import db from './db'
+import { DatabaseClientPool } from './dbclient'
 
 const POST_TABLE = 'post';
 
 export const createPost = async (post: Post): Promise<Post> => {
-    const client = await db.acquire()
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire()
     const result = await client.query(
         `INSERT INTO ${POST_TABLE} (poster_username, date, title, content) VALUES ($1, NOW(), $2, $3) RETURNING id, date;`,
         [post.posterUsername, post.title, post.content]
     )
-    await db.release(client)
+    await pool.release(client)
     const rows = [...result]
     if (rows.length == 0)
         throw new errors.DatabaseError();
@@ -23,12 +24,13 @@ export const createPost = async (post: Post): Promise<Post> => {
 }
 
 export const getPostById = async (id: string): Promise<Post> => {
-    const client = await db.acquire();
+    const pool = DatabaseClientPool.getInstance().getPool();
+    const client = await pool.acquire();
     const result = await client.query(
         `SELECT id, poster_username, date, title, content FROM ${POST_TABLE} WHERE id = $1;`,
         [id]
     );
-    await db.release(client)
+    await pool.release(client)
     const rows = [...result]
     if (rows.length == 0)
         throw new errors.ResourceNotFound('Post');
