@@ -30,7 +30,9 @@ export class DatabaseClientConfig {
 
 /**
  * The DatabaseClientPool class defines the `getInstance` method that 
- * lets clients access the unique singleton instance.
+ * lets clients access the unique singleton instance and a `initInstance`
+ * that lets clients initialize the instance with a specific config without
+ * passing it to every `getInstance` call.
  */
 export class DatabaseClientPool {
     private static instance: DatabaseClientPool;
@@ -69,6 +71,9 @@ export class DatabaseClientPool {
         return this.clientPool;
     }
 
+    /**
+     * The static method that controls initialization of the singleton instance.
+     */
     public static initInstance(cfg: DatabaseClientConfig) {
         if (DatabaseClientPool.instance != undefined)
             throw new DatabaseError('client pool is already initialized')
@@ -77,9 +82,6 @@ export class DatabaseClientPool {
 
     /**
      * The static method that controls the access to the singleton instance.
-     *
-     * This implementation let you subclass the DatabaseClientPool class while keeping
-     * just one instance of each subclass around.
      */
     public static getInstance(): DatabaseClientPool {
         if (DatabaseClientPool.instance == undefined)
