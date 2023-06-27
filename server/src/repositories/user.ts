@@ -44,12 +44,16 @@ export const getUserByUsername = async (username: string): Promise<User> => {
     const rows = [...result];
     if (rows.length == 0)
         throw new errors.ResourceNotFound('User');
+
     
     const userData = rows[0];
     return {
-        username: userData.get('username')!.toString(),
-        nickname: userData.get('nickname')!.toString(),
-        email: userData.get('email')!.toString()
+      username: userData.get('username')!.toString(),
+      nickname: userData.get('nickname')!.toString(),
+      email: userData.get('email')!.toString(),
+      role: userData.get('role')!.toString(),
+      salt: userData.get('salt')!.toString(),
+      password: userData.get('password')!.toString(),
     };
 };
 
