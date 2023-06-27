@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS "user" (
     role VARCHAR(255),
     salt VARCHAR(255)
 );
+

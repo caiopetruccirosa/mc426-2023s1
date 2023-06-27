@@ -9,7 +9,7 @@ const Post = ({ post }) => {
   const [like, setLike] = useState(0)
   const [likeClicked, setLikeClicked] = useState(false)
 
-  const userInfo = useContext(UserContext) ?? {username: 'mockUser'};
+  const userInfo = useContext(UserContext) ?? { username: 'mockUser' };
 
   const likePost = () => {
     if (likeClicked) {
@@ -25,7 +25,10 @@ const Post = ({ post }) => {
   const navigate = useNavigate();
 
   const handleRelatedArticle = () => {
-    navigate(`/${post.relatedArticle}`);
+    const route = userInfo.allArticles.filter(item => item.title == post.relatedArticle)
+    console.log(route)
+    userInfo.setArticle(route[0].description)
+    navigate(`/article`);
   }
 
   const handleAnswer = (e) => {
@@ -40,18 +43,18 @@ const Post = ({ post }) => {
       answer: answer
     }
 
-      // ESPECIFICAR ENDPOINT DA REQUEST DE CRIAR ANSWER (DE UM POST)
-      /*
-      try 
-      {
-        axios.post('api/endpointDeCriarResposta', data)
-      }
+    // ESPECIFICAR ENDPOINT DA REQUEST DE CRIAR ANSWER (DE UM POST)
+    /*
+    try 
+    {
+      axios.post('api/endpointDeCriarResposta', data)
+    }
 
-      catch(error)
-      {
-        console.error(error)
-      }
-      */
+    catch(error)
+    {
+      console.error(error)
+    }
+    */
 
     window.alert("Sua resposta foi adicionada! Obrigado.");
 
@@ -61,7 +64,7 @@ const Post = ({ post }) => {
 
   const handleClick = (postId) => {
 
-    navigate(`/forum/answers/${postId}`, { state: {post} });
+    navigate(`/forum/answers/${postId}`, { state: { post } });
   }
 
 
@@ -93,14 +96,14 @@ const Post = ({ post }) => {
           >
             <h3>{post.title}</h3>
             <p>@{post.author} -- {post.date}</p>
-            <h4>Artigo relacionado: 
-                <Button 
-                    variant="contained" 
-                    type="submit"
-                    onClick={handleRelatedArticle}
-                    sx={{ ml: 1 }}
-                >{post.relatedArticle}
-                </Button></h4>
+            <h4>Artigo relacionado:
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={handleRelatedArticle}
+                sx={{ ml: 1 }}
+              >{post.relatedArticle}
+              </Button></h4>
           </Box>
           <Box
             sx={{
@@ -135,11 +138,11 @@ const Post = ({ post }) => {
               type="text"
               placeholder="Digite uma resposta para o post"
             />
-            <Button 
-              variant="outlined" 
+            <Button
+              variant="outlined"
               type="submit"
               onClick={handleAnswer}
-              sx={{ padding: 1, height: 55 }} 
+              sx={{ padding: 1, height: 55 }}
             > Enviar resposta</Button>
             <div
               sx={{
@@ -147,18 +150,18 @@ const Post = ({ post }) => {
                 justifyContent: 'space-between'
               }}
             >
-              <Button 
+              <Button
                 variant="contained"
                 color="primary"
                 type="submit"
                 sx={{ mr: 1 }}
                 onClick={likePost}
               >
-                <FavoriteIcon sx={{ color: likeClicked ? 'red' : 'white', mr: 1 }}/>
+                <FavoriteIcon sx={{ color: likeClicked ? 'red' : 'white', mr: 1 }} />
                 ({like})
-              </Button> 
-              <Button 
-                variant="contained" 
+              </Button>
+              <Button
+                variant="contained"
                 type="submit"
                 onClick={() => handleClick(post.id)}
                 sx={{ ml: 1, mr: 1 }}

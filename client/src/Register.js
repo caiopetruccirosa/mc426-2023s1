@@ -16,24 +16,6 @@ function Register() {
 
   const user = useContext(UserContext);
 
-  //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
-
-  // function registerUser(e) {
-  //     e.preventDefault();
-
-  //     if (email !== "") {
-
-  //         user.setEmail(email);
-  //         user.setId(id);
-  //         setEmail("");
-  //         setId("");
-  //         setPassword("");
-  //         setRedirect(true);
-
-  //     }
-  // }
-
   function registerUser(e) {
     e.preventDefault();
     if (email !== "") {
@@ -43,9 +25,8 @@ function Register() {
           withCredentials: false,
         })
         .then((response) => {
-          console.log(response)
-          user.setUsername(username);
-          user.setId(id);
+          user.setUsername(response.data.user.username);
+          user.setId(response.data.user.id);
           setEmail("");
           setNickname("");
           setUsername("");

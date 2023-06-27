@@ -13,26 +13,6 @@ function Login() {
 
   const user = useContext(UserContext);
 
-
-  //FUNÇÃO DE LOGIN MOCKADA ENQUANTO N TENHO O ENDPOINT
-
-  // function loginUser(e) {
-  //   e.preventDefault();
-  //   if (email !== "") {
-
-  //     user.setEmail(email);
-  //     user.setId(id);
-  //     setEmail("");
-  //     setId("");
-  //     setPassword("");
-  //     setRedirect(true);
-
-
-  //   } else {
-  //     window.alert("ERRO DE LOGIN! Email ou senha incorretos!");
-  //   }
-  // }
-
   function loginUser(e) {
     e.preventDefault();
     if (username !== "") {
@@ -59,7 +39,7 @@ function Login() {
   }
 
   if (redirect) {
-    return <Navigate to={"/home"} />;
+    return <Navigate to={"/wiki"} />;
   }
 
   return (
