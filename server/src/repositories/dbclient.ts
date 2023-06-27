@@ -1,5 +1,6 @@
 import { Client } from 'ts-postgres';
 import { Pool, createPool } from 'generic-pool';
+import { DatabaseError } from '../errors/db';
 
 export class DatabaseClientConfig {
     readonly host: string;
@@ -69,6 +70,8 @@ export class DatabaseClientPool {
     }
 
     public static initInstance(cfg: DatabaseClientConfig) {
+        if (DatabaseClientPool.instance != undefined)
+            throw new DatabaseError('client pool is already initialized')
         DatabaseClientPool.instance = new DatabaseClientPool(cfg);
     }
 
@@ -79,6 +82,8 @@ export class DatabaseClientPool {
      * just one instance of each subclass around.
      */
     public static getInstance(): DatabaseClientPool {
+        if (DatabaseClientPool.instance == undefined)
+            throw new DatabaseError('client pool is not initialized')
         return DatabaseClientPool.instance;
     }
 }
