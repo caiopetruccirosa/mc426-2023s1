@@ -59,7 +59,7 @@ function Login() {
   }
 
   if (redirect) {
-    return <Navigate to={"/home"} />;
+    return <Navigate to={"/wiki"} />;
   }
 
   return (

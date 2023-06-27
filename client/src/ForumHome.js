@@ -5,7 +5,11 @@ import UserContext from "./UserContext";
 import { Box, Button, Grid, TextField } from "@mui/material";
 
 function ForumHome() {
+    const userInfo = useContext(UserContext)
 
+    if (!userInfo.username) {
+        return 'Você precisa fazer login para acessar essa página!';
+    }
     // array de posts mockados, podem apagar quando o server/db estiverem 100%
     let posts = [
         {
@@ -62,29 +66,29 @@ function ForumHome() {
     ];
     // fim do posts mockados
 
-      // ESPECIFICAR ENDPOINT DA REQUEST DE FETCH POSTS
-      /*
-      try 
-      {
-        posts = axios.GET('api/endpointDeGetPosts')
-      }
+    // ESPECIFICAR ENDPOINT DA REQUEST DE FETCH POSTS
+    /*
+    try 
+    {
+      posts = axios.GET('api/endpointDeGetPosts')
+    }
 
-      catch(error)
-      {
-        console.error(error)
-      }
-      */
+    catch(error)
+    {
+      console.error(error)
+    }
+    */
 
     return (
         <>
-        <div className="App">
-        {posts.map((post, index) => (
-            <Post key={index}
-                  post={post}
-            />
-      ))}
-    </div>
-      </>
+            <div className="App">
+                {posts.map((post, index) => (
+                    <Post key={index}
+                        post={post}
+                    />
+                ))}
+            </div>
+        </>
     )
 }
 
