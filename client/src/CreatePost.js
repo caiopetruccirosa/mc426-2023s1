@@ -139,7 +139,7 @@ const CreatePost = () => {
             onChange={(e) => setRelatedArticle(e.target.value)}
           >
             {allArticles.map((item) => (
-              <MenuItem key={item.relatedArticleId} value={item.relatedArticleId}>{item.title}</MenuItem>
+              <MenuItem key={item.id} value={item.id}>{item.title}</MenuItem>
             ))}
           </Select>
           <div style={{ flex: 1 }}></div>

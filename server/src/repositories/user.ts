@@ -43,6 +43,7 @@ export const getUserByUsername = async (username: string): Promise<User> => {
     const rows = [...result];
     if (rows.length == 0)
         throw new errors.ResourceNotFound('User');
+
     
     const userData = rows[0];
     return {
