@@ -69,7 +69,6 @@ function ForumHome() {
     {
       posts = axios.GET('api/posts')
     }
-
     catch(error)
     {
       console.error(error)
