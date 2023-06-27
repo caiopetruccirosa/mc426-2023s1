@@ -1,6 +1,9 @@
 import { signUp, signIn } from '../services/authentication';
 import errors from '../errors';
 
+// Mock the user.ts module
+jest.mock('../repositories/user');
+
 // User with credentials that follow all the requirements
 const rightUserCredentials = {
     username: 'rightusertest',
@@ -94,68 +97,75 @@ describe('Sign Up', () => {
                 }
             }
         });
-    });
+
+        it('should create a new user if all information is valid', async () => {
+            const user = rightUserCredentials
+            const response = await signUp(user)
+            expect(response.username).toBe(user.username)
+            expect(response.nickname).toBe(user.nickname)
+            expect(response.email).toBe(user.email)
+            expect(response.role).toBeDefined()
+            expect(response.password).toBeUndefined()
+            expect(response.salt).toBeUndefined()
+        })
+
+
+        it('should return an error if the user already exists', async () => {
+            const user = rightUserCredentials
+            await signUp(user)
+            try {
+                await signUp(user)
+            } catch (error) {
+                expect(error).toBeInstanceOf(errors.UsernameIsTaken);
+                if (error instanceof errors.UsernameIsTaken) {
+                    expect(error.message).toBe( `Username '${user.username}' is taken`);
+                }
+            }   
+        })
 })
-
-//       it('should create a new user if all information is valid', async () => {
-//           const user = rightUserCredentials
-//           const response = await signUp(user)
-//           expect(response.username).toBe(user.username)
-//           expect(response.nickname).toBe(user.nickname)
-//           expect(response.email).toBe(user.email)
-//           expect(response.role).toBeDefined()
-//           expect(response.password).toBeUndefined()
-//           expect(response.salt).toBeUndefined()
-//       })
-
-
-//   it('should return an error if the user already exists', async () => {
-//       const user = rightUserCredentials
-//       await signUp(user)
-//       try {
-//           await signUp(user)
-//       } catch (error) {
-//           expect(error.message).toBe(errors.USER_ALREADY_EXISTS)
-//       }
-//   })
-// })
 
   // Sign-in tests
 
-//   describe('signIn', () => {
-//       it('should return an error if the user is not found', async () => {
-//           const credentials = {
-//               username: 'nonexistentuser',
-//               password: 'P@ssw0rdNonExistent'
-//           }
-//           try {
-//               await signIn(credentials.username, credentials.username)
-//           } catch (error) {
-//               expect(error.message).toBe(errors.USER_NOT_FOUND)
-//           }
-//       })
+   describe('signIn', () => {
+       it('should return an error if the user is not found', async () => {
+           const credentials = {
+               username: 'nonexistentuser',
+               password: 'P@ssw0rdNonExistent'
+           }
+           try {
+               await signIn(credentials.username, credentials.username)
+           } catch (error) {
+                expect(error).toBeInstanceOf(errors.InvalidCredentials);
+                if (error instanceof errors.InvalidCredentials) {
+                    expect(error.message).toBe( `Invalid username or password`);
+                }
+            }   
+       })
 
-//       it('should return an error if the password is incorrect', async () => {
-//           const credentials = {
-//               username: rightUserCredentials.username,
-//               password: 'WRONG' + rightUserCredentials.password
-//           }
-//           try {
-//               await signIn(credentials.username, credentials.password)
-//           } catch (error) {
-//               expect(error.message).toBe(errors.INCORRECT_USERNAME_OR_PWD)
-//           }
-//       })
+       it('should return an error if the password is incorrect', async () => {
+           const credentials = {
+               username: rightUserCredentials.username,
+               password: 'WRONG' + rightUserCredentials.password
+           }
+           try {
+               await signIn(credentials.username, credentials.password)
+           } catch (error) {
+                expect(error).toBeInstanceOf(errors.InvalidCredentials);
+                if (error instanceof errors.InvalidCredentials) {
+                    expect(error.message).toBe( `Invalid username or password`);
+                }
+            }   
+       })
 
-//       it('should sign in the user if credentials are correct', async () => {
-//           const user = rightUserCredentials
-//           const response = await signIn(user.username, user.password)
-//           expect(response.username).toBe(user.username)
-//           expect(response.nickname).toBe(user.nickname)
-//           expect(response.email).toBe(user.email)
-//           expect(response.role).toBeDefined()
-//           expect(response.password).toBeUndefined()
-//           expect(response.salt).toBeUndefined()
-//       })
-//   })
-// })
+       it('should sign in the user if credentials are correct', async () => {
+            const user = rightUserCredentials
+            const response = await signUp(user)
+            expect(response.username).toBe(user.username)
+            expect(response.nickname).toBe(user.nickname)
+            expect(response.email).toBe(user.email)
+            expect(response.role).toBeDefined()
+            expect(response.password).toBeUndefined()
+            expect(response.salt).toBeUndefined()
+       })
+   })
+})
