@@ -22,10 +22,7 @@
   "dependencies": {
     "@babel/core": "^7.21.5",
     "@babel/plugin-transform-modules-commonjs": "^7.21.5",
-<<<<<<< HEAD
-=======
     "@babel/preset-env": "^7.21.5",
->>>>>>> develop
     "@babel/preset-typescript": "^7.21.5",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
