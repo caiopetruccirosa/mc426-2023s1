@@ -64,6 +64,7 @@ function ResponsiveDrawer(props) {
   const [email, setEmail] = React.useState("");
   const [id, setId] = React.useState("");
   const userInfo = React.useContext(UserContext);
+  const loggedIn = !(!userInfo.username);
 
   React.useEffect(() => {
     axios
@@ -116,7 +117,7 @@ function ResponsiveDrawer(props) {
         ))}
       </List>
       <List>
-        {loginItems.map((item, index) => (
+        {!loggedIn && loginItems.map((item, index) => (
           <Link index={index} className='link-custom' to={item.route}>
             <ListItem key={index}>
               <ListItemButton>
