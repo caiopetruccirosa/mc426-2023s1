@@ -42,8 +42,8 @@ function CreatePage() {
                 <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
                     <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
                         <form action="" onSubmit={e => addPostagem(e)}>
-                            <h1>Criar Artigo!</h1>
-                            <p>Escreva abaixo o contúdo da página WIKI que você deseja criar. O formato aceito é Markdown</p>
+                            <h1>Criar Artigo</h1>
+                            <p>Escreva abaixo o conteúdo da página Wiki que você deseja criar. O formato aceito é Markdown.</p>
                             <TextField
                                 sx={{ mb: 2, backgroundColor: "white" }}
                                 variant="outlined"

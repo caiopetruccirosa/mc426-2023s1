@@ -30,7 +30,7 @@ function Wiki() {
   }
 
   const handleArticleClick = (article) => {
-    userInfo.setArticle(article.description); // Updated: Pass the article description as a prop
+    userInfo.setArticle(article.id);
     navigate("/article"); // Assuming "/article" is the route to display the article details
   };
 
@@ -39,6 +39,7 @@ function Wiki() {
       <Grid container sx={{ justifyContent: "center" }}>
         <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
           <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
+           <h2>Artigos</h2>
             <List>
               {items.map((item, index) => (
                 <ListItem key={index}>

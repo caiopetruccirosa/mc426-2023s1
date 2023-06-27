@@ -160,6 +160,8 @@ function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
+
+        style={{ background: '#FFFFFF' }}
       >
         <Toolbar>
           <IconButton
@@ -171,9 +173,6 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            MC426 - Aplicação Wiki + Fórum
-          </Typography>
         </Toolbar>
       </AppBar>
       <Box
@@ -210,7 +209,7 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
+        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight, pt: "20px" }}
       >
         <main>
           <Routes>

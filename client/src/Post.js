@@ -3,6 +3,7 @@ import { Box, Button, Grid, TextField } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "./UserContext";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import moment from 'moment';
 
 const Post = ({ post }) => {
   const [answerContent, setAnswerContent] = useState('')
@@ -19,20 +20,18 @@ const Post = ({ post }) => {
       setLike(like + 1)
       setLikeClicked(true)
     }
-
   }
 
   const navigate = useNavigate();
 
   const handleRelatedArticle = () => {
-    const route = userInfo.allArticles.filter(item => item.title == post.relatedArticle)
-    console.log(route)
-    userInfo.setArticle(route[0].description)
+    //const route = userInfo.allArticles.filter(item => item.title == post.relatedArticle)
+    //console.log(route)
+    userInfo.setArticle(post.relatedArticleId)
     navigate(`/article`);
   }
 
   const handleAnswer = (e) => {
-
     const answer = {
       author: userInfo.username,
       content: answerContent,
@@ -67,6 +66,7 @@ const Post = ({ post }) => {
     navigate(`/forum/answers/${postId}`, { state: { post } });
   }
 
+  const postDate = new Date(post.timestamp)
 
   return (
     <Grid container sx={{ justifyContent: "left" }}>
@@ -95,15 +95,16 @@ const Post = ({ post }) => {
             }}
           >
             <h3>{post.title}</h3>
-            <p>@{post.author} -- {post.date}</p>
-            <h4>Artigo relacionado:
+            <p>@{post.posterUsername} -- {moment(postDate).format('HH:mm - DD-MM-YYYY')}</p>
+            <h4>
               <Button
                 variant="contained"
                 type="submit"
                 onClick={handleRelatedArticle}
                 sx={{ ml: 1 }}
-              >{post.relatedArticle}
-              </Button></h4>
+              >Artigo relacionado
+              </Button>
+            </h4>
           </Box>
           <Box
             sx={{
@@ -160,13 +161,13 @@ const Post = ({ post }) => {
                 <FavoriteIcon sx={{ color: likeClicked ? 'red' : 'white', mr: 1 }} />
                 ({like})
               </Button>
-              <Button
+              {/*<Button
                 variant="contained"
                 type="submit"
                 onClick={() => handleClick(post.id)}
                 sx={{ ml: 1, mr: 1 }}
               >Ver respostas ({post.answers.length})
-              </Button>
+            </Button>*/}
               <Button variant="contained" type="submit" sx={{ ml: 1, mr: 1 }}>Compartilhar</Button>
               <Button variant="contained" type="submit" sx={{ ml: 1 }}>Denunciar</Button>
             </div>

@@ -12,7 +12,7 @@ dotenv.config();
 DatabaseClientPool.initInstance(DatabaseClientConfig.buildFromEnv());
 
 const server: Express = express();
-const port = process.env.PORT;
+const port = process.env.PORT ?? 3000;
 
 server.use(cors({ credentials: true }));;
 server.use(compression());
