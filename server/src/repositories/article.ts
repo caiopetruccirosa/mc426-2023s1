@@ -7,7 +7,7 @@ const ARTICLE_TABLE = 'article';
 export const createArticle = async (article: Article): Promise<Article> => {
     const client = await db.acquire();
     const result = await client.query(
-        `INSERT INTO ${ARTICLE_TABLE} (creator_username title, content) VALUES ($1, $2, $3, $4) RETURNING id, timestamp;`,
+        `INSERT INTO ${ARTICLE_TABLE} (creator_username, title, content) VALUES ($1, $2, $3) RETURNING id, timestamp;`,
         [article.creatorUsername, article.title, article.content]
     );
     await db.release(client);

@@ -51,9 +51,14 @@ export const getAllPosts = async (): Promise<Post[]> => {
     const result = await client.query(
         `SELECT id, poster_username, timestamp, related_article_id, title, content FROM ${POST_TABLE};`
     );
+    
     await db.release(client);
     const rows = [...result];
     const posts: Post[] = [];
+    await db.release(client)
+
+    if (rows.length == 0)
+        throw new errors.DatabaseError();
 
     for (const postData of rows) {
         const post: Post = {

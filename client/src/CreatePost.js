@@ -8,6 +8,7 @@ const CreatePost = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [relatedArticle, setRelatedArticle] = useState('')
+  const [allArticles, setAllArticles] = useState([])
 
   const navigate = useNavigate();
 
@@ -16,6 +17,17 @@ const CreatePost = () => {
     return 'Você precisa fazer login para acessar essa página!';
   }
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('api/articles');
+      setAllArticles(response.data);
+    } catch (error) {
+      console.error(error);
+      setAllArticles(userInfo.allArticles);
+    }
+  };
+  fetchData();
+
   // funcao chamada ao clicar no botao "criar post"
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,13 +35,13 @@ const CreatePost = () => {
     const post = {
       content: content,
       posterUsername: userInfo.username,
-      relatedArticle: relatedArticle,
+      relatedArticleId: relatedArticle,
       title: title,
     };
 
     try 
     {
-      axios.post('api/posts', {post})
+      axios.post('api/posts', post)
     }
 
     catch(error)
@@ -128,9 +140,9 @@ const CreatePost = () => {
             value={relatedArticle}
             onChange={(e) => setRelatedArticle(e.target.value)}
           >
-            {userInfo.allArticles.map((item) => {
+            {allArticles.map((item) => {
               return (
-                <MenuItem value={item.title}>{item.title}</MenuItem>
+                <MenuItem value={item.relatedArticleId}>{item.title}</MenuItem>
 
               )
             })}
