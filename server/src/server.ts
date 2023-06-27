@@ -5,8 +5,11 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { DatabaseClientPool, DatabaseClientConfig } from './repositories/dbclient';
 
 dotenv.config();
+
+DatabaseClientPool.initInstance(DatabaseClientConfig.buildFromEnv());
 
 const server: Express = express();
 const port = process.env.PORT;
