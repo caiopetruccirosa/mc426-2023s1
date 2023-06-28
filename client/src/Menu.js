@@ -39,7 +39,7 @@ import { Navigate } from "react-router-dom";
 import Wiki from './Wiki';
 import Article from './Article';
 import CreatePage from './CreatePage';
-
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 const appBarHeight = "60px";
@@ -65,6 +65,12 @@ function ResponsiveDrawer(props) {
   const [id, setId] = React.useState("");
   const userInfo = React.useContext(UserContext);
   const loggedIn = !(!userInfo.username);
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    userInfo.setUsername(undefined)
+    navigate('/');
+  }
 
   React.useEffect(() => {
     axios
@@ -129,6 +135,18 @@ function ResponsiveDrawer(props) {
             </ListItem>
           </Link >
         ))}
+        {loggedIn && 
+          <>
+            <ListItem>
+              <ListItemButton onClick={() => logOut()}>
+                <ListItemIcon>
+                  {0 % 2 === 0 ? <Key /> : <AssignmentInd />}
+                </ListItemIcon>
+                <ListItemText primary='Logout' />
+              </ListItemButton>
+            </ListItem>
+          </>
+        }
       </List>
       <Divider />
       <List>
