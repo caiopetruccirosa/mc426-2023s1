@@ -8,7 +8,7 @@ export const createPost = async (post: Post): Promise<Post> => {
     const pool = DatabaseClientPool.getInstance().getPool();
     const client = await pool.acquire()
     const result = await client.query(
-        `INSERT INTO ${POST_TABLE} (poster_username, related_article_id, title, content, timestamp) VALUES ($1, $2, $3, $4, NOW()) RETURNING id, related_article_id, timestamp;`,
+        `INSERT INTO ${POST_TABLE} (poster_username, related_article_id, title, content, "timestamp") VALUES ($1, $2, $3, $4, NOW()) RETURNING id, related_article_id, "timestamp";`,
         [post.posterUsername, post.relatedArticleId, post.title, post.content]
     )
     await pool.release(client)
@@ -28,7 +28,7 @@ export const getPostById = async (id: string): Promise<Post> => {
     const pool = DatabaseClientPool.getInstance().getPool();
     const client = await pool.acquire();
     const result = await client.query(
-        `SELECT id, poster_username, timestamp, related_article_id, title, content FROM ${POST_TABLE} WHERE id = $1;`,
+        `SELECT id, poster_username, "timestamp", related_article_id, title, content FROM ${POST_TABLE} WHERE id = $1;`,
         [id]
     );
     await pool.release(client)
@@ -51,7 +51,7 @@ export const getAllPosts = async (): Promise<Post[]> => {
     const pool = DatabaseClientPool.getInstance().getPool();
     const client = await pool.acquire();
     const result = await client.query(
-        `SELECT id, poster_username, timestamp, related_article_id, title, content FROM ${POST_TABLE};`
+        `SELECT id, poster_username, "timestamp", related_article_id, title, content FROM ${POST_TABLE};`
     );
     await pool.release(client);
 

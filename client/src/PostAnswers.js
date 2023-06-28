@@ -7,15 +7,12 @@ import moment from 'moment';
 
 function PostAnswers() {
   const userInfo = useContext(UserContext)
-
   const location = useLocation();
   const { post } = location.state;
 
   if (!userInfo.username) {
     return 'Você precisa fazer login para acessar essa página mc102!';
   }
-
-  console.log(post);
 
   return (
     <>
