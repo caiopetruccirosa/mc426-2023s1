@@ -22,7 +22,7 @@ function PostAnswers() {
           <Answer key={item.id}
             author={item.authorUsername}
             content={item.text}
-            date={moment(new Date(item.timestamp)).format('HH:mm - DD-MM-YYYY')}
+            date={moment(new Date(item.timestamp)).format('HH:mm - DD/MM/YYYY')}
           />
         ))}
       </div>

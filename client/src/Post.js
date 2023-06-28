@@ -55,7 +55,7 @@ const Post = ({ post }) => {
     navigate(`/forum/answers/${postId}`, { state: { post } });
   }
 
-  const postDate = moment(new Date(post.timestamp)).format('HH:mm - DD-MM-YYYY')
+  const postDate = moment(new Date(post.timestamp)).format('HH:mm - DD/MM/YYYY')
 
   return (
     <Grid container sx={{ justifyContent: "left" }}>
