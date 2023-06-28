@@ -46,7 +46,7 @@ const Answer = ({ author, content, date }) => {
                     paddingX: 4,
                   }}
                 >
-                  <p>{author} -- {date}</p>
+                  <p>@{author} -- {date}</p>
                 </Box>
                 <Box
                   sx = {{

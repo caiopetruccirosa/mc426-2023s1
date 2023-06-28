@@ -9,7 +9,7 @@ export default class Comment {
         id: string,
         postId: number,
         authorUsername: string,
-        timestamp: Date = new Date(Date.now() - 3 * 60 * 60 * 1000),
+        timestamp: Date,
         text: string,
     ) {
         this.id = id;

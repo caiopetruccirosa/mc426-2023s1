@@ -9,7 +9,7 @@ export default class Post {
     constructor(
         id: string,
         posterUsername: string,
-        timestamp: Date = new Date(Date.now() - 3 * 60 * 60 * 1000),
+        timestamp: Date,
         relatedArticleId: number,
         title: string,
         content: string,

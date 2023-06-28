@@ -8,7 +8,7 @@ export const createComment = async (comment: Comment): Promise<Comment> => {
     const pool = DatabaseClientPool.getInstance().getPool();
     const client = await pool.acquire();
     const result = await client.query(
-        `INSERT INTO ${COMMENT_TABLE} (post_id, author_username, text) VALUES ($1, $2, $3) RETURNING id, post_id, author_username, timestamp, text;`,
+        `INSERT INTO ${COMMENT_TABLE} (post_id, author_username, text, timestamp) VALUES ($1, $2, $3, NOW()) RETURNING id, post_id, author_username, timestamp, text;`,
         [comment.postId, comment.authorUsername, comment.text]
     );
     await pool.release(client);

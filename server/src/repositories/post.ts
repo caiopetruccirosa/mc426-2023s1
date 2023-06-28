@@ -8,7 +8,7 @@ export const createPost = async (post: Post): Promise<Post> => {
     const pool = DatabaseClientPool.getInstance().getPool();
     const client = await pool.acquire()
     const result = await client.query(
-        `INSERT INTO ${POST_TABLE} (poster_username, related_article_id, title, content) VALUES ($1, $2, $3, $4) RETURNING id, related_article_id, timestamp;`,
+        `INSERT INTO ${POST_TABLE} (poster_username, related_article_id, title, content, timestamp) VALUES ($1, $2, $3, $4, NOW()) RETURNING id, related_article_id, timestamp;`,
         [post.posterUsername, post.relatedArticleId, post.title, post.content]
     )
     await pool.release(client)
