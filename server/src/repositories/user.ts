@@ -4,14 +4,20 @@ import { DatabaseClientPool } from './dbclient'
 
 const USER_TABLE = '"user"';
 
-export const createUser = async (user: User) => {
+export const createUser = async (user: User): Promise<User> => {
     const pool = DatabaseClientPool.getInstance().getPool();
-    const client = await pool.acquire();
-    await client.query(
-        `INSERT INTO ${USER_TABLE} (username, nickname, email, salt, password, role) VALUES ($1, $2, $3, $4, $5, $6);`,
+    const client = await pool.acquire()
+    const result = await client.query(
+        `INSERT INTO ${USER_TABLE} (username, nickname, email, salt, password, role) VALUES ($1, $2, $3, $4, $5, $6) RETURNING username;`,
         [user.username, user.nickname, user.email, user.salt!, user.password!, user.role!]
-    );
+    )
+    const rows = [...result]
     await pool.release(client)
+    
+    if (rows.length == 0)
+        throw new errors.DatabaseError();
+
+    return user
 };
 
 export const existsUserByUsername = async (username: string): Promise<boolean> => {
@@ -37,6 +43,7 @@ export const getUserByUsername = async (username: string): Promise<User> => {
     const rows = [...result];
     if (rows.length == 0)
         throw new errors.ResourceNotFound('User');
+
     
     const userData = rows[0];
     return {
@@ -48,4 +55,3 @@ export const getUserByUsername = async (username: string): Promise<User> => {
         password: userData.get('password')!.toString(),
     };
 };
-

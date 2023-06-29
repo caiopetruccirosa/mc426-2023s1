@@ -1,48 +1,55 @@
 import axios from "axios";
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Grid, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import UserContext from "./UserContext";
 
 const CreatePost = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
-  const [relatedArticle, setRelatedArticle] = useState('')
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [relatedArticle, setRelatedArticle] = useState('');
+  const [allArticles, setAllArticles] = useState([]);
 
   const navigate = useNavigate();
-
   const userInfo = useContext(UserContext);
-  if (!userInfo.username) {
-    return 'Você precisa fazer login para acessar essa página!';
-  }
 
-  // funcao chamada ao clicar no botao "criar post"
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('api/articles');
+        setAllArticles(response.data);
+      } catch (error) {
+        console.error(error);
+        setAllArticles(userInfo.allArticles);
+      }
+    };
+
+    fetchData();
+  }, [userInfo.allArticles]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const post = {
       content: content,
       posterUsername: userInfo.username,
-      relatedArticle: relatedArticle,
+      relatedArticleId: relatedArticle,
       title: title,
     };
 
-    // ESPECIFICAR ENDPOINT DA REQUEST DE CRIAR POST
-    /*
-    try 
-    {
-      axios.post('api/endpointDeCriarPost', {post})
+    try {
+      axios.post('api/posts', post);
+    } catch (error) {
+      console.error(error);
     }
-
-    catch(error)
-    {
-      console.error(error)
-    }
-    */
 
     window.alert("Seu post foi adicionado ao fórum! Obrigado.");
 
     navigate('/forum');
+  };
+
+  if (!userInfo.username) {
+    return 'Você precisa fazer login para acessar essa página!';
   }
 
   return (
@@ -131,13 +138,9 @@ const CreatePost = () => {
             value={relatedArticle}
             onChange={(e) => setRelatedArticle(e.target.value)}
           >
-            {userInfo.allArticles.map((item) => {
-              return (
-                <MenuItem value={item.title}>{item.title}</MenuItem>
-
-              )
-            })}
-
+            {allArticles.map((item) => (
+              <MenuItem key={item.id} value={item.id}>{item.title}</MenuItem>
+            ))}
           </Select>
           <div style={{ flex: 1 }}></div>
           <div

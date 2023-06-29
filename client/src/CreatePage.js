@@ -6,10 +6,6 @@ import MDEditor from "@uiw/react-md-editor";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { Navigate } from "react-router-dom";
 
-
-
-
-
 function CreatePage() {
 
     const userInfo = useContext(UserContext);
@@ -23,40 +19,19 @@ function CreatePage() {
         return 'Você precisa fazer login para acessar essa página!';
     }
 
-    //FUNÇAÕ MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
-    function addPostagem(e) {
-        e.preventDefault();
-        if (title && description && userInfo.username) {
-            window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.username)
-        }
-    }
-
-    // function addPostagem(e) {
-    //     e.preventDefault();
-    //     axios.put('https://api-todo-list-six.vercel.app/todos', { title: title, text: text, user: userInfo.email }, { withCredentials: true })
-    //         .then(response => {
-
-    //             setTitle('');
-    //         })
-    // }
-
-
-
-
     //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
+    function addPostagem(e) {
+         e.preventDefault();
+         axios.post('api/articles', { title: title, content: description, creatorUsername: userInfo.username }, { withCredentials: true })
+             .then(response => {
+                window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.username)
+                setTitle('');
+                setDescription('');
+                setRedirect(true);
+             })
+     }
 
-    function registerUser(e) {
-        e.preventDefault();
-        console.log(e)
-        // const teste = userInfo.allArticles
-        // teste.push({ title: title, description: description })
-        // console.log(teste)
-        userInfo.setAllArticles([...userInfo.allArticles, { title, description }]);
-        setRedirect(true)
-
-    }
     if (redirect) {
         return <Navigate to={"/wiki"} />;
     }
@@ -66,9 +41,9 @@ function CreatePage() {
             <Grid container sx={{ justifyContent: "center", }}>
                 <Grid sm={12} item sx={{ padding: 2, display: "flex", justifyContent: "center" }}>
                     <Box sx={{ bgcolor: "white", paddingY: 4, paddingX: 10, borderRadius: 2 }}>
-                        <form action="" onSubmit={e => registerUser(e)}>
-                            <h1>Criar Artigo!</h1>
-                            <p>Escreva abaixo o contúdo da página WIKI que vc quer criar, aceitamos texto no formato Markdown ou (Html, porém não funciona ainda pois n temos um interpretador pra isso)</p>
+                        <form action="" onSubmit={e => addPostagem(e)}>
+                            <h1>Criar Artigo</h1>
+                            <p>Escreva abaixo o conteúdo da página Wiki que você deseja criar. O formato aceito é Markdown.</p>
                             <TextField
                                 sx={{ mb: 2, backgroundColor: "white" }}
                                 variant="outlined"

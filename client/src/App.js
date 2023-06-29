@@ -138,10 +138,11 @@ function App() {
 
 
   const items = [
-    { title: "MC102", description: description102 },
-    { title: "MC202", description: description202 },
-    { title: "MC322", description: description322 },
-  ]
+    { title: "MC102", description: description102, relatedArticleId: 1 },
+    { title: "MC202", description: description202, relatedArticleId: 2 },
+    { title: "MC322", description: description322, relatedArticleId: 3 }
+  ];
+  
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [article, setArticle] = useState("");

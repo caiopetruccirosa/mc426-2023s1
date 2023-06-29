@@ -39,7 +39,7 @@ import { Navigate } from "react-router-dom";
 import Wiki from './Wiki';
 import Article from './Article';
 import CreatePage from './CreatePage';
-
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 const appBarHeight = "60px";
@@ -64,6 +64,13 @@ function ResponsiveDrawer(props) {
   const [email, setEmail] = React.useState("");
   const [id, setId] = React.useState("");
   const userInfo = React.useContext(UserContext);
+  const loggedIn = !(!userInfo.username);
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    userInfo.setUsername(undefined)
+    navigate('/');
+  }
 
   React.useEffect(() => {
     axios
@@ -116,7 +123,7 @@ function ResponsiveDrawer(props) {
         ))}
       </List>
       <List>
-        {loginItems.map((item, index) => (
+        {!loggedIn && loginItems.map((item, index) => (
           <Link index={index} className='link-custom' to={item.route}>
             <ListItem key={index}>
               <ListItemButton>
@@ -128,6 +135,18 @@ function ResponsiveDrawer(props) {
             </ListItem>
           </Link >
         ))}
+        {loggedIn && 
+          <>
+            <ListItem>
+              <ListItemButton onClick={() => logOut()}>
+                <ListItemIcon>
+                  {0 % 2 === 0 ? <Key /> : <AssignmentInd />}
+                </ListItemIcon>
+                <ListItemText primary='Logout' />
+              </ListItemButton>
+            </ListItem>
+          </>
+        }
       </List>
       <Divider />
       <List>
@@ -159,6 +178,8 @@ function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
+
+        style={{ background: '#FFFFFF' }}
       >
         <Toolbar>
           <IconButton
@@ -170,9 +191,6 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            MC426 - Aplicação Wiki + Fórum
-          </Typography>
         </Toolbar>
       </AppBar>
       <Box
@@ -209,7 +227,7 @@ function ResponsiveDrawer(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight }}
+        sx={{ flexGrow: 1, width: { sm: `calc(100% - ${drawerWidth}px)` }, mt: appBarHeight, pt: "20px" }}
       >
         <main>
           <Routes>
