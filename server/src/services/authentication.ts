@@ -51,14 +51,10 @@ const checkPasswordRegex = (password: string) => {
 }
 
 const validateUserFields = (user: User) => {
-  try {
     checkUsernameRegex(user.username)
     checkNicknameRegex(user.nickname)
     checkEmailRegex(user.email)
     checkPasswordRegex(user.password!)
-  } catch (error) {
-    throw error
-  }
 }
 
 const overwriteUserSaltAndPwd = (user: User): User => {
