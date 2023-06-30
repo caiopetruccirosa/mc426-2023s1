@@ -56,8 +56,8 @@ const validateUserFields = (user: User) => {
     checkNicknameRegex(user.nickname)
     checkEmailRegex(user.email)
     checkPasswordRegex(user.password!)
-  } catch (e: any) {
-    throw e
+  } catch (error) {
+    throw error
   }
 }
 
