@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Box, Button, Grid, TextField } from "@mui/material";
+import axios from 'axios';
+import moment from 'moment';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from "./UserContext";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import moment from 'moment';
-import axios from 'axios';
 
 const Post = ({ post }) => {
   const [answerContent, setAnswerContent] = useState('')
@@ -26,8 +26,6 @@ const Post = ({ post }) => {
   const navigate = useNavigate();
 
   const handleRelatedArticle = () => {
-    //const route = userInfo.allArticles.filter(item => item.title == post.relatedArticle)
-    //console.log(route)
     userInfo.setArticle(post.relatedArticleId)
     navigate(`/article`);
   }
@@ -41,7 +39,7 @@ const Post = ({ post }) => {
 
     try {
       axios.post('api/comments', data)
-    } catch(error) {
+    } catch (error) {
       console.error(error)
     }
 
@@ -67,8 +65,6 @@ const Post = ({ post }) => {
             bgcolor: "white",
             width: 800,
             maxHeight: 500,
-            //paddingY: 2,
-            //paddingX: 6,
             borderRadius: 10,
             boxShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)',
             textAlign: 'left'
@@ -156,7 +152,7 @@ const Post = ({ post }) => {
                 onClick={() => handleClick(post.id)}
                 sx={{ ml: 1, mr: 1 }}
               >Ver respostas ({post.answers.length})
-            </Button>}
+              </Button>}
               <Button variant="contained" type="submit" sx={{ ml: 1, mr: 1 }}>Compartilhar</Button>
               <Button variant="contained" type="submit" sx={{ ml: 1 }}>Denunciar</Button>
             </div>

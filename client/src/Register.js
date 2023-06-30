@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
-import axios from 'axios';
-import UserContext from "./UserContext";
-import { Navigate } from "react-router-dom";
 import { Box, Button, Grid, TextField } from "@mui/material";
+import axios from 'axios';
+import { useContext, useState } from "react";
+import { Navigate } from "react-router-dom";
+import UserContext from "./UserContext";
 
 function Register() {
 

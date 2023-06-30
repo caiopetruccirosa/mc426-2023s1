@@ -1,46 +1,37 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
 import AssignmentInd from '@mui/icons-material/AssignmentInd';
+import Forum from '@mui/icons-material/Forum';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import Key from '@mui/icons-material/Key';
+import LibraryBooks from '@mui/icons-material/LibraryBooks';
+import MenuIcon from '@mui/icons-material/Menu';
+import RateReviewIcon from '@mui/icons-material/RateReview';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
-import Forum from '@mui/icons-material/Forum';
-import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import Key from '@mui/icons-material/Key';
-import LibraryBooks from '@mui/icons-material/LibraryBooks';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import RateReviewIcon from '@mui/icons-material/RateReview';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import UserContext from './UserContext';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import * as React from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 import Register from './Register';
-import LoginTeste from './Menu';
-
-import Info from './Info';
+import UserContext from './UserContext';
 import axios from 'axios';
-import ForumHome from './ForumHome';
-import CreatePost from './CreatePost';
-import PostAnswers from './PostAnswers';
-import Home from './Wiki';
-import Login from './Login';
-import { Button } from '@mui/material';
-import { Navigate } from "react-router-dom";
-import Wiki from './Wiki';
+import { useNavigate } from 'react-router-dom';
 import Article from './Article';
 import CreatePage from './CreatePage';
-import { useNavigate } from 'react-router-dom';
-
+import CreatePost from './CreatePost';
+import ForumHome from './ForumHome';
+import Info from './Info';
+import Login from './Login';
+import PostAnswers from './PostAnswers';
+import Wiki from './Wiki';
 const drawerWidth = 240;
 const appBarHeight = "60px";
 
@@ -84,20 +75,11 @@ function ResponsiveDrawer(props) {
       });
   }, []);
 
-  //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
 
   function logout() {
 
     setEmail('')
   }
-
-  // function logout(){
-  //   axios.post('https://api-todo-list-six.vercel.app/logout', {}, {withCredentials:true})
-  //   .then(()=>{
-  //     setEmail('')
-  //   })
-  // }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -135,7 +117,7 @@ function ResponsiveDrawer(props) {
             </ListItem>
           </Link >
         ))}
-        {loggedIn && 
+        {loggedIn &&
           <>
             <ListItem>
               <ListItemButton onClick={() => logOut()}>

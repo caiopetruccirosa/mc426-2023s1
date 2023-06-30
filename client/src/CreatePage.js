@@ -1,10 +1,9 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import UserContext from "./UserContext";
 import { Box, Button, Grid, TextField } from "@mui/material";
 import MDEditor from "@uiw/react-md-editor";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import axios from "axios";
+import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
+import UserContext from "./UserContext";
 
 function CreatePage() {
 
@@ -22,15 +21,15 @@ function CreatePage() {
     //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
     function addPostagem(e) {
-         e.preventDefault();
-         axios.post('api/articles', { title: title, content: description, creatorUsername: userInfo.username }, { withCredentials: true })
-             .then(response => {
+        e.preventDefault();
+        axios.post('api/articles', { title: title, content: description, creatorUsername: userInfo.username }, { withCredentials: true })
+            .then(response => {
                 window.alert("Sua postagem com o título: " + title + " foi criada! Obrigado " + userInfo.username)
                 setTitle('');
                 setDescription('');
                 setRedirect(true);
-             })
-     }
+            })
+    }
 
     if (redirect) {
         return <Navigate to={"/wiki"} />;
