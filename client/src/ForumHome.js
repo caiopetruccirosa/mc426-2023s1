@@ -13,7 +13,6 @@ async function getCommentsByPostId(postId) {
     }
 }
 
-// Função principal para buscar os posts e seus comentários
 async function getPostsAndComments() {
     try {
         const response = await axios.get('api/posts');

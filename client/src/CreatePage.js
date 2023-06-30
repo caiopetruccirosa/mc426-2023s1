@@ -12,13 +12,9 @@ function CreatePage() {
     const [description, setDescription] = useState("");
     const [redirect, setRedirect] = useState("");
 
-
-
     if (!userInfo.username) {
         return 'Você precisa fazer login para acessar essa página!';
     }
-
-    //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
 
     function addPostagem(e) {
         e.preventDefault();

@@ -31,7 +31,7 @@ function Wiki() {
 
   const handleArticleClick = (article) => {
     userInfo.setArticle(article.id);
-    navigate("/article"); // Assuming "/article" is the route to display the article details
+    navigate("/article");
   };
 
   return (
