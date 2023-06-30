@@ -44,8 +44,6 @@ const Post = ({ post }) => {
     }
 
     window.alert("Sua resposta foi adicionada! Obrigado.");
-
-    // limpar campo de resposta apos pop up
     setAnswerContent('');
   }
 
