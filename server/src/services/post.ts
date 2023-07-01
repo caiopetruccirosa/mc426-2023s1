@@ -12,7 +12,6 @@ export const getAllPosts = async (): Promise<Post[]> => {
 }
 
 export const createPost = async (post: Post): Promise<Post> => {
-    // check if user with username does exists
     if (!(await userRepository.existsUserByUsername(post.posterUsername)))
         throw new errors.ResourceNotFound('User')
 

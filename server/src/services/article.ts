@@ -12,7 +12,6 @@ export const getAllArticles = async (): Promise<Article[]> => {
 }
 
 export const createArticle = async (article: Article): Promise<Article> => {
-    // check if user with creatorUsername does exists
     if (!(await userRepository.existsUserByUsername(article.creatorUsername)))
         throw new errors.ResourceNotFound('User')
 

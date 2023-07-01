@@ -9,7 +9,7 @@ import axios from "axios";
 import Login from "./Login";
 import Home from "./Wiki";
 import Info from "./Info";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 
 
 function App() {
@@ -142,39 +142,13 @@ function App() {
     { title: "MC202", description: description202, relatedArticleId: 2 },
     { title: "MC322", description: description322, relatedArticleId: 3 }
   ];
-  
+
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [article, setArticle] = useState("");
   const [allArticles, setAllArticles] = useState(items);
   const userInfo = useContext(UserContext);
 
-  // useEffect(() => {
-  //   axios
-  //     .post(
-  //       "https://api-todo-list-six.vercel.app/user",
-  //       { id: userInfo.id },
-  //       { withCredentials: true }
-  //     )
-  //     .then((response) => {
-  //       setEmail(response.data.email);
-  //     });
-  // }, []);
-
-  //FUNÇÃO MOCKADA ENQUANTO N TEMOS O ENDPOINT
-
-
-  // function logout() {
-
-  //   setEmail('')
-  // }
-
-  // function logout(){
-  //   axios.post('https://api-todo-list-six.vercel.app/logout', {}, {withCredentials:true})
-  //   .then(()=>{
-  //     setEmail('')
-  //   })
-  // }
 
   return (
     <UserContext.Provider value={{ username, setUsername, id, setId, article, setArticle, allArticles, setAllArticles }}>

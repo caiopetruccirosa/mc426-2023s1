@@ -12,7 +12,6 @@ export const getAllComments = async (): Promise<Comment[]> => {
 }
 
 export const createComment = async (comment: Comment): Promise<Comment> => {
-    // check if user with authorUsername exists
     if (!(await userRepository.existsUserByUsername(comment.authorUsername)))
         throw new errors.ResourceNotFound('User')
 

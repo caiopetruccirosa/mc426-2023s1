@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, Button, Grid, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
+import axios from "axios";
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserContext from "./UserContext";
 
 const CreatePost = () => {
