@@ -9,7 +9,7 @@ import axios from "axios";
 import Login from "./Login";
 import Home from "./Wiki";
 import Info from "./Info";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 
 
 function App() {
