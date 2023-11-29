@@ -1,12 +1,11 @@
-import { useState, useContext } from "react";
+import { Box, Button, Grid, TextField } from "@mui/material";
 import axios from "axios";
-import UserContext from "./UserContext";
+import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Box, Button, ButtonBase, Grid, TextField } from "@mui/material";
+import UserContext from "./UserContext";
 
 function Login() {
   const [username, setUsername] = useState("");
-  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const [redirect, setRedirect] = useState(false);

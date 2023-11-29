@@ -1,9 +1,9 @@
+import moment from 'moment';
+import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Answer from './Answer';
 import Post from './Post';
-import { useContext } from "react";
 import UserContext from "./UserContext";
-import moment from 'moment';
 
 function PostAnswers() {
   const userInfo = useContext(UserContext)

@@ -13,22 +13,28 @@ const generatePassword = (salt: string, password: string): string =>  {
     return crypto.createHmac('sha256', [salt, password].join('/')).update(SECRET).digest('hex')
 }
 
-const validateUserFields = (user: User) => {
+const checkUsernameRegex = (username: string) => {
     // check if username contains only letters
     const USERNAME_REGEX = /^[a-zA-Z]+$/;
-    if (!USERNAME_REGEX.test(user.username)) 
-        throw new InvalidParameterError('username', user.username);
+    if (!USERNAME_REGEX.test(username)) 
+        throw new InvalidParameterError('username', username);
+}
 
+const checkNicknameRegex = (nickname: string) => {
     // check if username contains only letters or spaces
     const NICKNAME_REGEX = /^[a-zA-Z\s]+$/;
-    if (!NICKNAME_REGEX.test(user.nickname)) 
-        throw new InvalidParameterError('nickname', user.nickname);
+    if (!NICKNAME_REGEX.test(nickname)) 
+        throw new InvalidParameterError('nickname', nickname);
+}
 
+const checkEmailRegex = (email: string) => {
     // check if email is valid
     const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
-    if (!EMAIL_REGEX.test(user.email))
-        throw new InvalidParameterError('email', user.email);
+    if (!EMAIL_REGEX.test(email))
+        throw new InvalidParameterError('email', email);
+}
 
+const checkPasswordRegex = (password: string) => {
     // check if password contains at least length 5 and one lowercase letter, uppercase letter, special character and number
     // explanation:
     // ^                               start anchor
@@ -40,8 +46,15 @@ const validateUserFields = (user: User) => {
     // $                               end anchor
     // obs: {n,} indicates that we want n of the group. {1,} is redundant, but good practice for future changes
     const PASSWORD_REGEX = /^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{5,}$/
-    if (!user.password || !PASSWORD_REGEX.test(user.password!))
-        throw new InvalidParameterError('password', user.password);
+    if (!password || !PASSWORD_REGEX.test(password!))
+        throw new InvalidParameterError('password', password);
+}
+
+const validateUserFields = (user: User) => {
+    checkUsernameRegex(user.username)
+    checkNicknameRegex(user.nickname)
+    checkEmailRegex(user.email)
+    checkPasswordRegex(user.password!)
 }
 
 const overwriteUserSaltAndPwd = (user: User): User => {
